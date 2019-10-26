@@ -24,5 +24,30 @@ namespace Lab6
         {
             InitializeComponent();
         }
+
+        private void bartenderPausOrContiniueButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void waitressPausOrContiniueButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void patronsPausOrContiniueButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void openOrCloseThePub_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void shutdownAllThreads_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
