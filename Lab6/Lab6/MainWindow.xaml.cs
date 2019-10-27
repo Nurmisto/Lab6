@@ -21,6 +21,10 @@ namespace Lab6
     public partial class MainWindow : Window
     {
         public bool simulationStarted = false;
+        public int numberOfGlass = 8;
+        public int numberOfSeats = 9;
+        public DateTime DateTimerStart;
+        
         public double BarOpenTime { get; set; }
         public List<string> PatronNameList = new List<string>() { "Alexander", "Anders", "Andreas", "Andreé", "Andreea", "Charlotte", "Daniel", "Elvis", "Emil", "FredrikÄrAldrigHär", "Johan",
                                                                 "John", "Jonas", "Karo", "Khosro", "Luna", "Marcus", "Nicklas", "Nils", "Petter", "Pontus", "Robin", "Simon", "Sofia", "Tijana", 
