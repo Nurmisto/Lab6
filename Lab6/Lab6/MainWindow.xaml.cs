@@ -20,18 +20,22 @@ namespace Lab6
     /// </summary>
     public partial class MainWindow : Window
     {
+        public bool simulationStarted = false;
         public double BarOpenTime { get; set; }
         public List<string> PatronNameList = new List<string>() { "Alexander", "Anders", "Andreas", "Andreé", "Andreea", "Charlotte", "Daniel", "Elvis", "Emil", "FredrikÄrAldrigHär", "Johan",
                                                                 "John", "Jonas", "Karo", "Khosro", "Luna", "Marcus", "Nicklas", "Nils", "Petter", "Pontus", "Robin", "Simon", "Sofia", "Tijana", 
                                                                 "Tommy", "Toni", "Wilhelm"};
         public MainWindow()
         {
+            
             InitializeComponent();
+            
         }
 
+      
         private void bartenderPausOrContiniueButton_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void waitressPausOrContiniueButton_Click(object sender, RoutedEventArgs e)

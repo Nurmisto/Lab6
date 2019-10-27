@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="The epic pub of epicness" Height="450" Width="800">
     <Grid>
-        <Label x:Name="Bartender" Content="Bartender" HorizontalAlignment="Left" Margin="60,40,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <Label x:Name="Waitress" Content="Waitress" HorizontalAlignment="Left" Margin="260,40,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label x:Name="Bartenderr" Content="Bartender" HorizontalAlignment="Left" Margin="60,40,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label x:Name="Waitressr" Content="Waitress" HorizontalAlignment="Left" Margin="260,40,0,0" VerticalAlignment="Top" FontSize="16"/>
         <Label x:Name="Patrons" Content="Patrons" HorizontalAlignment="Left" Margin="460,40,0,0" VerticalAlignment="Top" FontSize="16"/>
         <Label x:Name="NumberOfPatronsInBar" Content="testText" HorizontalAlignment="Left" Margin="656,136,0,0" VerticalAlignment="Top" Width="89"/>
         <Label x:Name="NumberOfGlasOnShelf" Content="testText" HorizontalAlignment="Left" Margin="656,167,0,0" VerticalAlignment="Top" Width="89"/>
@@ -21,6 +21,9 @@
         <Button x:Name="patronsPausOrContiniueButton" Content="Paus/Continue" HorizontalAlignment="Left" Margin="460,276,0,0" VerticalAlignment="Top" Width="180" Height="30" FontSize="16" Click="patronsPausOrContiniueButton_Click"/>
         <Button x:Name="openOrCloseThePub" Content="Open/close the pub" HorizontalAlignment="Left" Margin="60,311,0,0" VerticalAlignment="Top" Width="580" FontSize="16" Height="30" Click="openOrCloseThePub_Click"/>
         <Button x:Name="shutdownAllThreads" Content="Panic button (press to stop all threads)" HorizontalAlignment="Left" Margin="570,389,0,0" VerticalAlignment="Top" Width="212" Background="#FFDDDDDD" Foreground="Red" Click="shutdownAllThreads_Click"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="17" Margin="201,365,0,0" TextWrapping="Wrap" Text="{Binding ElementName=sliderValue,Path=Value,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="39" TextDecorations="{x:Null}"/>
+        <Slider x:Name="sliderValue" HorizontalAlignment="Left" Margin="26,389,0,0" VerticalAlignment="Top" Width="214" Maximum="500" Value="120"/>
+        <Label x:Name="label" Content="Time untill bar closes (seconds)" HorizontalAlignment="Left" Margin="26,361,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
