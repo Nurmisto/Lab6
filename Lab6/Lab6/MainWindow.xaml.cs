@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,6 +24,8 @@ namespace Lab6
         public bool simulationStarted = false;
         public int numberOfGlass = 8;
         public int numberOfSeats = 9;
+        public double TimeUntillBarCloses;
+        public bool couplesNight;
         public DateTime DateTimerStart;
         
         public double BarOpenTime { get; set; }
@@ -33,7 +36,25 @@ namespace Lab6
         {
             
             InitializeComponent();
+            TimeUntillBarCloses = sliderValue.Value;
+            Console.WriteLine(TimeUntillBarCloses);
             
+        }
+
+
+        public void StartSimulation()
+        {
+            simulationStarted = true;
+            if (couplesNight)
+            {
+
+            }
+            else
+            {
+                
+            }
+            
+
         }
 
       
@@ -52,8 +73,22 @@ namespace Lab6
 
         }
 
-        private void openOrCloseThePub_Click(object sender, RoutedEventArgs e)
+        private void OpenOrCloseThePub_Click(object sender, RoutedEventArgs e)
         {
+            if (!simulationStarted)
+            {
+                UIOnBarOpen();
+                StartSimulation();
+                
+
+            }
+            else
+            {
+                OpenOrCloseThePub.IsEnabled = false;
+                OpenOrCloseThePub.Content = "Closing the bar and going home..";
+                TimeUntillBarCloses = 0;
+                UIOnBarClosed();
+            }
 
         }
 
@@ -61,5 +96,22 @@ namespace Lab6
         {
 
         }
+
+        void UIOnBarOpen()
+        {
+            OpenOrCloseThePub.Content = "Close the bar";
+            NumberOfGlasOnShelf.IsEnabled = false;
+            SliderValueTextBox.IsEnabled = false;
+            sliderValue.IsEnabled = false;
+        }
+
+        void UIOnBarClosed()
+        {
+            OpenOrCloseThePub.Content = "Open the bar";
+            NumberOfGlasOnShelf.IsEnabled = true;
+            SliderValueTextBox.IsEnabled = true;
+            sliderValue.IsEnabled = true;
+        }
+
     }
 }
