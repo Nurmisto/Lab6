@@ -22,6 +22,7 @@ namespace Lab6
     public partial class MainWindow : Window
     {
         public bool simulationStarted = false;
+        public int numberOfPatronsInBar = 0;
         public int numberOfGlass = 8;
         public int numberOfSeats = 9;
         public double TimeUntillBarCloses;
@@ -38,7 +39,9 @@ namespace Lab6
             InitializeComponent();
             TimeUntillBarCloses = sliderValue.Value;
             Console.WriteLine(TimeUntillBarCloses);
-            
+            NumberOfPatronsInBarLabel.Content = $"Total guests in bar: {numberOfPatronsInBar}";
+            NumberOfGlasOnShelfLabel.Content = $"Total glasses on shelf: {numberOfGlass}";
+            NumberOfVacantSeatsLabel.Content = $"Total chairs available: {numberOfSeats}";
         }
 
 
@@ -100,7 +103,7 @@ namespace Lab6
         void UIOnBarOpen()
         {
             OpenOrCloseThePub.Content = "Close the bar";
-            NumberOfGlasOnShelf.IsEnabled = false;
+            NumberOfGlasOnShelfLabel.IsEnabled = false;
             SliderValueTextBox.IsEnabled = false;
             sliderValue.IsEnabled = false;
         }
@@ -108,10 +111,9 @@ namespace Lab6
         void UIOnBarClosed()
         {
             OpenOrCloseThePub.Content = "Open the bar";
-            NumberOfGlasOnShelf.IsEnabled = true;
+            NumberOfGlasOnShelfLabel.IsEnabled = true;
             SliderValueTextBox.IsEnabled = true;
             sliderValue.IsEnabled = true;
         }
-
     }
 }

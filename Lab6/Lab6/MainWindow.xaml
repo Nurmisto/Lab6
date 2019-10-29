@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab6"
         mc:Ignorable="d"
-        Title="The epic pub of epicness" Height="450" Width="800">
+        Title="The epic pub of epicness" Height="500" Width="900">
     <Grid>
         <Label x:Name="Bartenderr" Content="Bartender" HorizontalAlignment="Left" Margin="60,40,0,0" VerticalAlignment="Top" FontSize="16"/>
         <Label x:Name="Waitressr" Content="Waitress" HorizontalAlignment="Left" Margin="260,40,0,0" VerticalAlignment="Top" FontSize="16"/>
         <Label x:Name="Patrons" Content="Patrons" HorizontalAlignment="Left" Margin="460,40,0,0" VerticalAlignment="Top" FontSize="16"/>
         <Label x:Name="NumberOfPatronsInBar" HorizontalAlignment="Left" Margin="656,136,0,0" VerticalAlignment="Top" Width="89"/>
-        <Label x:Name="NumberOfVacantTables" Content="testText" HorizontalAlignment="Left" Margin="656,198,0,0" VerticalAlignment="Top" Width="89"/>
+        <Label x:Name="NumberOfVacantSeatsLabel" Content="testText" HorizontalAlignment="Left" Margin="656,198,0,0" VerticalAlignment="Top" Width="212"/>
         <ListBox x:Name="bartenderEventListBox" HorizontalAlignment="Left" Height="200" Margin="60,71,0,0" VerticalAlignment="Top" Width="180"/>
         <ListBox x:Name="waitressEventListBox" HorizontalAlignment="Left" Height="200" Margin="260,71,0,0" VerticalAlignment="Top" Width="180"/>
         <ListBox x:Name="patronsEventListBox" HorizontalAlignment="Left" Height="200" Margin="460,71,0,0" VerticalAlignment="Top" Width="180"/>
@@ -23,7 +23,8 @@
         <TextBox x:Name="SliderValueTextBox" HorizontalAlignment="Left" Height="17" Margin="201,365,0,0" TextWrapping="Wrap" Text="{Binding ElementName=sliderValue,Path=Value,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="39" TextDecorations="{x:Null}"/>
         <Slider x:Name="sliderValue" HorizontalAlignment="Left" Margin="26,389,0,0" VerticalAlignment="Top" Width="214" Maximum="500" Value="120"/>
         <Label x:Name="label" Content="Time untill bar closes (seconds)" HorizontalAlignment="Left" Margin="26,361,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="NumberOfGlasOnShelf" HorizontalAlignment="Left" Height="23" Margin="656,169,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="89"/>
+        <Label x:Name="NumberOfGlasOnShelfLabel" Content="testText" HorizontalAlignment="Left" Margin="656,167,0,0" VerticalAlignment="Top" Width="212"/>
+        <Label x:Name="NumberOfPatronsInBarLabel" Content="testText" HorizontalAlignment="Left" Margin="656,136,0,0" VerticalAlignment="Top" Width="212"/>
 
     </Grid>
 </Window>
