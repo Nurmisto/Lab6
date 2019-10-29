@@ -30,12 +30,9 @@ namespace Lab6
         public DateTime DateTimerStart;
         
         public double BarOpenTime { get; set; }
-        public List<string> PatronNameList = new List<string>() { "Alexander", "Anders", "Andreas", "Andreé", "Andreea", "Charlotte", "Daniel", "Elvis", "Emil", "FredrikÄrAldrigHär", "Johan",
-                                                                "John", "Jonas", "Karo", "Khosro", "Luna", "Marcus", "Nicklas", "Nils", "Petter", "Pontus", "Robin", "Simon", "Sofia", "Tijana", 
-                                                                "Tommy", "Toni", "Wilhelm"};
+        
         public MainWindow()
         {
-            
             InitializeComponent();
             TimeUntillBarCloses = sliderValue.Value;
             Console.WriteLine(TimeUntillBarCloses);

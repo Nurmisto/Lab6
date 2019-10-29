@@ -17,7 +17,6 @@ namespace Lab6
             {
                 Thread.Sleep(200);
                 return patron;
-
             }
             
         }
