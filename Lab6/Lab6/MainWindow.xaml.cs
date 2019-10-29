@@ -39,9 +39,27 @@ namespace Lab6
             InitializeComponent();
             TimeUntillBarCloses = sliderValue.Value;
             Console.WriteLine(TimeUntillBarCloses);
+
             NumberOfPatronsInBarLabel.Content = $"Total guests in bar: {numberOfPatronsInBar}";
             NumberOfGlasOnShelfLabel.Content = $"Total glasses on shelf: {numberOfGlass}";
             NumberOfVacantSeatsLabel.Content = $"Total chairs available: {numberOfSeats}";
+
+            PausOrContinueButtonsEnabled(false);
+        }
+        public void PausOrContinueButtonsEnabled(bool enabled)
+        {
+            if (enabled)
+            {
+                bartenderPausOrContinueButton.IsEnabled = true;
+                waitressPausOrContinueButton.IsEnabled = true;
+                patronsPausOrContinueButton.IsEnabled = true;
+            }
+            else if (!enabled)
+            {
+                bartenderPausOrContinueButton.IsEnabled = false;
+                waitressPausOrContinueButton.IsEnabled = false;
+                patronsPausOrContinueButton.IsEnabled = false;
+            }
         }
 
 
@@ -56,8 +74,6 @@ namespace Lab6
             {
                 
             }
-            
-
         }
 
       
@@ -82,13 +98,14 @@ namespace Lab6
             {
                 UIOnBarOpen();
                 StartSimulation();
-                
+                PausOrContinueButtonsEnabled(true);
 
             }
             else
             {
                 OpenOrCloseThePub.IsEnabled = false;
                 OpenOrCloseThePub.Content = "Closing the bar and going home..";
+                PausOrContinueButtonsEnabled(false);
                 TimeUntillBarCloses = 0;
                 UIOnBarClosed();
             }
@@ -103,7 +120,6 @@ namespace Lab6
         void UIOnBarOpen()
         {
             OpenOrCloseThePub.Content = "Close the bar";
-            NumberOfGlasOnShelfLabel.IsEnabled = false;
             SliderValueTextBox.IsEnabled = false;
             sliderValue.IsEnabled = false;
         }
@@ -111,7 +127,6 @@ namespace Lab6
         void UIOnBarClosed()
         {
             OpenOrCloseThePub.Content = "Open the bar";
-            NumberOfGlasOnShelfLabel.IsEnabled = true;
             SliderValueTextBox.IsEnabled = true;
             sliderValue.IsEnabled = true;
         }
