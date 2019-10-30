@@ -57,19 +57,32 @@ namespace Lab6
         }
 
 
-        public void StartSimulation()
+        public void StartSimulation(bool startSimulation)
         {
             simulationStarted = true;
-
-            Bouncer bouncer = new Bouncer();
-            bouncer.GeneratePatrons();
-            foreach (var patron in Patron.patrons)
+            if (startSimulation)
             {
-                if(patron.name != null)
+                Bouncer bouncer = new Bouncer();
+                bouncer.GeneratePatrons();
+                foreach (var patron in Patron.patrons)
                 {
-                    patronsEventListBox.Items.Add($"{patron.name} kom in och går till baren");
+                    if (patron.name != null)
+                    {
+                        patronsEventListBox.Items.Add($"{patron.name} kom in och går till baren");
+                    }
                 }
+                RefreshListboxes();
             }
+            else
+            {
+                MessageBox.Show("Simulation ended");
+            }
+        }
+        private void RefreshListboxes()
+        {
+            bartenderEventListBox.Items.Refresh();
+            waitressEventListBox.Items.Refresh();
+            patronsEventListBox.Items.Refresh();
         }
 
       
@@ -93,16 +106,19 @@ namespace Lab6
             if (!Bar.barOpen)
             {
                 Bar.barOpen = true;
+                MessageBox.Show("Open bar");
                 UIOnBarOpen();
-                StartSimulation();
+                StartSimulation(true);
                 PausOrContinueButtonsEnabled(true);
             }
-            else
+            else if(Bar.barOpen)
             {
                 Bar.barOpen = false;
+                MessageBox.Show("Close bar");
                 OpenOrCloseThePub.Content = "Closing the bar and going home..";
                 TimeUntillBarCloses = 0;
                 UIOnBarClosed();
+                StartSimulation(false);
                 PausOrContinueButtonsEnabled(false);
             }
 
