@@ -21,6 +21,11 @@ namespace Lab6
     /// </summary>
     public partial class MainWindow : Window
     {
+        private void mainWindowObj()
+        {
+            App mainWindow = new App();
+            App.            
+        }
         public bool simulationStarted = false;
         public double TimeUntillBarCloses;
         public bool couplesNight;

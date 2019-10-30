@@ -28,6 +28,7 @@ namespace Lab6
                         {
                             Random newPatronTimer = new Random();
                             Thread.Sleep(newPatronTimer.Next(200, 1000));
+                            
                             x++;
                         }
                     }
