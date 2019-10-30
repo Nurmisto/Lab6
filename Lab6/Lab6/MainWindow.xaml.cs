@@ -22,9 +22,6 @@ namespace Lab6
     public partial class MainWindow : Window
     {
         public bool simulationStarted = false;
-        public int numberOfPatronsInBar = 0;
-        public int numberOfGlass = 8;
-        public int numberOfSeats = 9;
         public double TimeUntillBarCloses;
         public bool couplesNight;
         public DateTime DateTimerStart;
@@ -37,9 +34,9 @@ namespace Lab6
             TimeUntillBarCloses = sliderValue.Value;
             Console.WriteLine(TimeUntillBarCloses);
 
-            NumberOfPatronsInBarLabel.Content = $"Total guests in bar: {numberOfPatronsInBar}";
-            NumberOfGlasOnShelfLabel.Content = $"Total glasses on shelf: {numberOfGlass}";
-            NumberOfVacantSeatsLabel.Content = $"Total chairs available: {numberOfSeats}";
+            NumberOfPatronsInBarLabel.Content = $"Total guests in bar: {Bar.NumberOfPatronsInBar}";
+            NumberOfGlasOnShelfLabel.Content = $"Total glasses on shelf: {Bar.NumberOfGlasses}";
+            NumberOfVacantSeatsLabel.Content = $"Total chairs available: {Bar.NumberOfSeats}";
 
             PausOrContinueButtonsEnabled(false);
         }
@@ -63,13 +60,15 @@ namespace Lab6
         public void StartSimulation()
         {
             simulationStarted = true;
-            if (couplesNight)
-            {
 
-            }
-            else
+            Bouncer bouncer = new Bouncer();
+            bouncer.GeneratePatrons();
+            foreach (var patron in Patron.patrons)
             {
-                
+                if(patron.name != null)
+                {
+                    patronsEventListBox.Items.Add($"{patron.name} kom in och går till baren");
+                }
             }
         }
 
@@ -91,20 +90,20 @@ namespace Lab6
 
         private void OpenOrCloseThePub_Click(object sender, RoutedEventArgs e)
         {
-            if (!simulationStarted)
+            if (!Bar.barOpen)
             {
+                Bar.barOpen = true;
                 UIOnBarOpen();
                 StartSimulation();
                 PausOrContinueButtonsEnabled(true);
-
             }
             else
             {
-                OpenOrCloseThePub.IsEnabled = false;
+                Bar.barOpen = false;
                 OpenOrCloseThePub.Content = "Closing the bar and going home..";
-                PausOrContinueButtonsEnabled(false);
                 TimeUntillBarCloses = 0;
                 UIOnBarClosed();
+                PausOrContinueButtonsEnabled(false);
             }
 
         }

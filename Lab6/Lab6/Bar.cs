@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lab6
+{
+    abstract public class Bar
+    {
+        public static bool barOpen = false;
+        public static int NumberOfPatronsInBar { get; set; } = 0;
+        public static int NumberOfGlasses { get; set; } = 8;
+        public static int NumberOfSeats { get; set; } = 9;
+    }
+}

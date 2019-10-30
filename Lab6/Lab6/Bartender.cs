@@ -6,7 +6,7 @@ namespace Lab6
 {
     public partial class MainWindow
     {
-        public class Bartender
+        public class Bartender : Bar
         {
             public Bartender()
             {

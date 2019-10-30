@@ -5,7 +5,7 @@ namespace Lab6
 {
     public partial class MainWindow
     {
-        public class Patron
+        public class Patron : Bar
         {
             public static Queue<Patron> patrons = new Queue<Patron>();
 

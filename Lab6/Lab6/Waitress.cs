@@ -2,7 +2,7 @@
 {
     public partial class MainWindow
     {
-        public class Waitress
+        public class Waitress : Bar
         {
 
         }
