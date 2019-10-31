@@ -15,20 +15,20 @@ namespace Lab6
         {
             Task.Run(() => {
                 int x = 0;
-                while (true)
+                while (barOpen)
                 {
                     if (barOpen && x < 1)
                     {
                         //logSsytem.Log("bóuncer let patron in");
-
+                        patronsQue.Enqueue(new Patron());
                         x++;
                         Thread.Sleep(200);
                     }
-                    if (barOpen = true && x >= 1)
+                    else
                     {
                         Random newPatronTimer = new Random();
                         Thread.Sleep(newPatronTimer.Next(200, 1000));
-                        
+                        patronsQue.Enqueue(new Patron());
                         x++;
                     }
                 }

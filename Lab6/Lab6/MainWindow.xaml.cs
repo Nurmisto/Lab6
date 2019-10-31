@@ -37,18 +37,24 @@ namespace Lab6
         }
         
 
-        void UIOnBarOpen()
+        public void UIOnBarOpen()
         {
             OpenOrCloseThePub.Content = "Close the bar";
             SliderValueTextBox.IsEnabled = false;
             sliderValue.IsEnabled = false;
+            bartenderPausOrContinueButton.IsEnabled = true;
+            waitressPausOrContinueButton.IsEnabled = true;
+            patronsPausOrContinueButton.IsEnabled = true;
         }
 
-        void UIOnBarClosed()
+        public void UIOnBarClosed()
         {
             OpenOrCloseThePub.Content = "Open the bar";
             SliderValueTextBox.IsEnabled = true;
             sliderValue.IsEnabled = true;
+            bartenderPausOrContinueButton.IsEnabled = false;
+            waitressPausOrContinueButton.IsEnabled = false;
+            patronsPausOrContinueButton.IsEnabled = false;
         }
 
         

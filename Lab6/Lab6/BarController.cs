@@ -29,60 +29,42 @@ namespace Lab6
                 view.sliderValue.IsEnabled = false;
             }
         }
-
-
-        
-        public void PausOrContinueButtonsEnabled(bool enabled)
-        {
-            if (enabled)
-            {
-                view.bartenderPausOrContinueButton.IsEnabled = true;
-                view.waitressPausOrContinueButton.IsEnabled = true;
-                view.patronsPausOrContinueButton.IsEnabled = true;   
-            }
-            else if (!enabled)
-            {
-                view.bartenderPausOrContinueButton.IsEnabled = false;
-                view.waitressPausOrContinueButton.IsEnabled = false;
-                view.patronsPausOrContinueButton.IsEnabled = false;
-            }
-        }
         public void StartSimulation(bool startSimulation)
         {
             if (startSimulation)
             {
-                //starta bouncer h´är istället
+                Bartender bartender = new Bartender();
+                Waitress waitress = new Waitress();
+                Bouncer bouncer = new Bouncer();
                 
-                
-                model.bouncer.GeneratePatrons();
+                bouncer.GeneratePatrons();
                 Thread.Sleep(1000);
-                foreach (var patron in Patron.patronsQue)
+
+                foreach (var patron in model.patronsQue)
                 {
-                    if (patron.name != null)
-                    {
-                        view.patronsEventListBox.Items.Add($"{patron.name} kom in och går till baren");
-                    }
+                    view.patronsEventListBox.Items.Add($"{patron.name} kom in och går till baren");
+                    view.RefreshListboxes();
                 }
-                view.RefreshListboxes();
             }
             else
             {
                 MessageBox.Show("Simulation ended");
             }
         }
-        
-
-        
-
         private void OpenOrCloseThePub_Click(object sender, RoutedEventArgs e)
         {
             if (!model.barOpen)
             {
+                model.barOpen = true;
+                MessageBox.Show("Bar open");
+                view.UIOnBarOpen();
                 StartSimulation(true);
-                MessageBox.Show("Bar Open");
             }
-            else
+            else if(model.barOpen)
             {
+                model.barOpen = false;
+                MessageBox.Show("Bar closed");
+                view.UIOnBarClosed();
                 StartSimulation(false);
             }
         }
