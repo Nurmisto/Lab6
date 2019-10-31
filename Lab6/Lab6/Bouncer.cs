@@ -8,6 +8,7 @@ namespace Lab6
     
         public class Bouncer : Bar
         {
+
             public Bouncer()
             {
                  
@@ -15,20 +16,20 @@ namespace Lab6
 
         
 
-        public static void GeneratePatrons()
+        public void GeneratePatrons()
             {
                 Task.Run(() => {
                     while (true)
                     {
                         int x = 0;
-                        if (Bar.barOpen && x < 1)
+                        if (barOpen && x < 1)
                         {
-                            logSsytem.Log("bóuncer let patron in");
-                            Patron.patrons.Enqueue(new Patron());
+                            //logSsytem.Log("bóuncer let patron in");
+                            patron.patronsQue.Enqueue(new Patron());
                             x++;
                             Thread.Sleep(200);
                         }
-                        if (Bar.barOpen = true && x > 0)
+                        if (barOpen = true && x > 0)
                         {
                             Random newPatronTimer = new Random();
                             Thread.Sleep(newPatronTimer.Next(200, 1000));

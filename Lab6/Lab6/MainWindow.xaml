@@ -15,10 +15,10 @@
         <ListBox x:Name="bartenderEventListBox" HorizontalAlignment="Left" Height="200" Margin="60,71,0,0" VerticalAlignment="Top" Width="180"/>
         <ListBox x:Name="waitressEventListBox" HorizontalAlignment="Left" Height="200" Margin="260,71,0,0" VerticalAlignment="Top" Width="180"/>
         <ListBox x:Name="patronsEventListBox" HorizontalAlignment="Left" Height="200" Margin="460,71,0,0" VerticalAlignment="Top" Width="180"/>
-        <Button x:Name="bartenderPausOrContinueButton" Content="Paus/Continue" HorizontalAlignment="Left" Margin="60,276,0,0" VerticalAlignment="Top" Width="180" Height="30" FontSize="16" Click="bartenderPausOrContiniueButton_Click"/>
-        <Button x:Name="waitressPausOrContinueButton" Content="Paus/Continue" HorizontalAlignment="Left" Margin="260,276,0,0" VerticalAlignment="Top" Width="180" Height="30" FontSize="16" Click="waitressPausOrContiniueButton_Click"/>
-        <Button x:Name="patronsPausOrContinueButton" Content="Paus/Continue" HorizontalAlignment="Left" Margin="460,276,0,0" VerticalAlignment="Top" Width="180" Height="30" FontSize="16" Click="patronsPausOrContiniueButton_Click"/>
-        <Button x:Name="OpenOrCloseThePub" Content="Open/close the pub" HorizontalAlignment="Left" Margin="60,311,0,0" VerticalAlignment="Top" Width="580" FontSize="16" Height="30" Click="OpenOrCloseThePub_Click"/>
+        <Button x:Name="bartenderPausOrContinueButton" Content="Paus/Continue" HorizontalAlignment="Left" Margin="60,276,0,0" VerticalAlignment="Top" Width="180" Height="30" FontSize="16" Click="bartenderPausOrContinueButton_Click"/>
+        <Button x:Name="waitressPausOrContinueButton" Content="Paus/Continue" HorizontalAlignment="Left" Margin="260,276,0,0" VerticalAlignment="Top" Width="180" Height="30" FontSize="16" Click="waitressPausOrContinueButton_Click"/>
+        <Button x:Name="patronsPausOrContinueButton" Content="Paus/Continue" HorizontalAlignment="Left" Margin="460,276,0,0" VerticalAlignment="Top" Width="180" Height="30" FontSize="16" Click="patronsPausOrContinueButton_Click"/>
+        <Button x:Name="OpenOrCloseThePub" Content="Open/close the pub" HorizontalAlignment="Left" Margin="60,311,0,0" VerticalAlignment="Top" Width="580" FontSize="16" Height="30"/>
         <Button x:Name="shutdownAllThreads" Content="Panic button (press to stop all threads)" HorizontalAlignment="Left" Margin="570,389,0,0" VerticalAlignment="Top" Width="212" Background="#FFDDDDDD" Foreground="Red" Click="shutdownAllThreads_Click"/>
         <TextBox x:Name="SliderValueTextBox" HorizontalAlignment="Left" Height="17" Margin="201,365,0,0" TextWrapping="Wrap" Text="{Binding ElementName=sliderValue,Path=Value,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="39" TextDecorations="{x:Null}"/>
         <Slider x:Name="sliderValue" HorizontalAlignment="Left" Margin="26,389,0,0" VerticalAlignment="Top" Width="214" Maximum="500" Value="120"/>

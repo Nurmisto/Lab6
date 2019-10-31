@@ -29,12 +29,13 @@ namespace Lab6
 
             //skapa bouncer och logsystem stoppa in log ststem i bouncern.
         }
-        private void RefreshListboxes()
+        public void RefreshListboxes()
         {
             bartenderEventListBox.Items.Refresh();
             waitressEventListBox.Items.Refresh();
             patronsEventListBox.Items.Refresh();
         }
+        
 
         void UIOnBarOpen()
         {
@@ -49,5 +50,7 @@ namespace Lab6
             SliderValueTextBox.IsEnabled = true;
             sliderValue.IsEnabled = true;
         }
+
+        
     }
 }

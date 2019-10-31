@@ -3,11 +3,10 @@ using System.Collections.Generic;
 
 namespace Lab6
 {
-    public partial class MainWindow
-    {
+
         public class Patron : Bar
         {
-            public static Queue<Patron> patrons = new Queue<Patron>();
+            public Queue<Patron> patronsQue = new Queue<Patron>();
 
             public List<string> patronNameList = new List<string>() { "Alexander", "Anders", "Andreas", "Andreé", "Andreea", "Charlotte", "Daniel", "Elvis", "Emil", "FredrikÄrAldrigHär", "Johan",
                                                                 "John", "Jonas", "Karo", "Khosro", "Luna", "Marcus", "Nicklas", "Nils", "Petter", "Pontus", "Robin", "Simon", "Sofia", "Tijana",
@@ -20,5 +19,5 @@ namespace Lab6
                 name = patronNameList[index];
             }
         }
-    }
+    
 }

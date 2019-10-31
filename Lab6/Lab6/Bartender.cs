@@ -4,8 +4,7 @@ using System.Threading;
 
 namespace Lab6
 {
-    public partial class MainWindow
-    {
+
         public class Bartender : Bar
         {
             public Bartender()
@@ -20,5 +19,5 @@ namespace Lab6
             }
             
         }
-    }
+    
 }

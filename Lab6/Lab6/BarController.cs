@@ -12,9 +12,8 @@ namespace Lab6
         {
             this.view = view;
             this.model = model;
-            model.StartAgents();
-            
-            
+            view.Show();
+            view.OpenOrCloseThePub.Click += OpenOrCloseThePub_Click;
         }
 
         public void SetTimeSlider()
@@ -51,23 +50,27 @@ namespace Lab6
             if (startSimulation)
             {
                 //starta bouncer h´är istället
-                
-                foreach (var patron in Patron.patrons)
+                model.bouncer.GeneratePatrons();
+                foreach (var patron in model.patron.patronsQue)
                 {
                     if (patron.name != null)
                     {
-                        patronsEventListBox.Items.Add($"{patron.name} kom in och går till baren");
+                        view.patronsEventListBox.Items.Add($"{patron.name} kom in och går till baren");
                     }
                 }
-                RefreshListboxes();
+                view.RefreshListboxes();
             }
             else
             {
                 MessageBox.Show("Simulation ended");
             }
         }
-        private void OpenOrCloseThePub_Click(object sender, RoutedEventArgs e)
+        
+
+        public void OpenOrCloseThePub()
         {
+            
+
             if (!model.barOpen)
             {
                 StartSimulation(true);
@@ -78,10 +81,16 @@ namespace Lab6
                 StartSimulation(false);
             }
         }
-        private void waitressPausOrContiniueButton_Click(object sender, RoutedEventArgs e)
-        {
 
+        private void OpenOrCloseThePub_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
+
+        //private void waitressPausOrContiniueButton_Click(object sender, RoutedEventArgs e)
+        //{
+
+        //}
 
         private void patronsPausOrContiniueButton_Click(object sender, RoutedEventArgs e)
         {
