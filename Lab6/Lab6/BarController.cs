@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 
 namespace Lab6
 {
@@ -11,31 +12,46 @@ namespace Lab6
         {
             this.view = view;
             this.model = model;
+            model.StartAgents();
+            
+            
         }
 
-        TimeUntillBarCloses = sliderValue.Value;
+        public void SetTimeSlider()
+        {
+            if (!model.barOpen)
+            {
+                model.TimeUntillBarCloses = view.sliderValue.Value;
+            }
+            else
+            {
+                view.sliderValue.IsEnabled = false;
+            }
+        }
+
+
         
         public void PausOrContinueButtonsEnabled(bool enabled)
         {
             if (enabled)
             {
-                bartenderPausOrContinueButton.IsEnabled = true;
-                waitressPausOrContinueButton.IsEnabled = true;
-                patronsPausOrContinueButton.IsEnabled = true;
+                view.bartenderPausOrContinueButton.IsEnabled = true;
+                view.waitressPausOrContinueButton.IsEnabled = true;
+                view.patronsPausOrContinueButton.IsEnabled = true;   
             }
             else if (!enabled)
             {
-                bartenderPausOrContinueButton.IsEnabled = false;
-                waitressPausOrContinueButton.IsEnabled = false;
-                patronsPausOrContinueButton.IsEnabled = false;
+                view.bartenderPausOrContinueButton.IsEnabled = false;
+                view.waitressPausOrContinueButton.IsEnabled = false;
+                view.patronsPausOrContinueButton.IsEnabled = false;
             }
         }
         public void StartSimulation(bool startSimulation)
         {
             if (startSimulation)
             {
-                Bouncer bouncer = new Bouncer(); //starta bouncer h´är istället
-                bouncer.GeneratePatrons();
+                //starta bouncer h´är istället
+                
                 foreach (var patron in Patron.patrons)
                 {
                     if (patron.name != null)
@@ -52,7 +68,15 @@ namespace Lab6
         }
         private void OpenOrCloseThePub_Click(object sender, RoutedEventArgs e)
         {
-
+            if (!model.barOpen)
+            {
+                StartSimulation(true);
+                MessageBox.Show("Bar Open");
+            }
+            else
+            {
+                StartSimulation(false);
+            }
         }
         private void waitressPausOrContiniueButton_Click(object sender, RoutedEventArgs e)
         {

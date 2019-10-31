@@ -5,17 +5,17 @@ using System.Windows;
 
 namespace Lab6
 {
-    public partial class MainWindow
-    {
+    
         public class Bouncer : Bar
         {
-            public Bouncer(DateTime TimeStamp)
+            public Bouncer()
             {
-                public string timeStamp = this.TimeStamp.ToString(); 
+                 
             }
 
+        
 
-            public void GeneratePatrons()
+        public static void GeneratePatrons()
             {
                 Task.Run(() => {
                     while (true)
@@ -39,5 +39,5 @@ namespace Lab6
                 });
             }
         }
-    }
+    
 }
