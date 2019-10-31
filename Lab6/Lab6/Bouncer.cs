@@ -9,7 +9,10 @@ namespace Lab6
     {
         public class Bouncer : Bar
         {
-
+            public Bouncer(DateTime TimeStamp)
+            {
+                public string timeStamp = this.TimeStamp.ToString(); 
+            }
 
 
             public void GeneratePatrons()
@@ -20,6 +23,7 @@ namespace Lab6
                         int x = 0;
                         if (Bar.barOpen && x < 1)
                         {
+                            logSsytem.Log("bóuncer let patron in");
                             Patron.patrons.Enqueue(new Patron());
                             x++;
                             Thread.Sleep(200);

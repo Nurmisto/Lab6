@@ -21,11 +21,7 @@ namespace Lab6
     /// </summary>
     public partial class MainWindow : Window
     {
-        private void mainWindowObj()
-        {
-            App mainWindow = new App();
-            App.            
-        }
+        
         public bool simulationStarted = false;
         public double TimeUntillBarCloses;
         public bool couplesNight;
@@ -38,7 +34,7 @@ namespace Lab6
             InitializeComponent();
             TimeUntillBarCloses = sliderValue.Value;
             Console.WriteLine(TimeUntillBarCloses);
-
+            //skapa bouncer och logsystem stoppa in log ststem i bouncern.
             NumberOfPatronsInBarLabel.Content = $"Total guests in bar: {Bar.NumberOfPatronsInBar}";
             NumberOfGlasOnShelfLabel.Content = $"Total glasses on shelf: {Bar.NumberOfGlasses}";
             NumberOfVacantSeatsLabel.Content = $"Total chairs available: {Bar.NumberOfSeats}";
@@ -67,7 +63,7 @@ namespace Lab6
             simulationStarted = true;
             if (startSimulation)
             {
-                Bouncer bouncer = new Bouncer();
+                Bouncer bouncer = new Bouncer(); //starta bouncer h´är istället
                 bouncer.GeneratePatrons();
                 foreach (var patron in Patron.patrons)
                 {

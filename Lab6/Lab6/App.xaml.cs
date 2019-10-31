@@ -15,8 +15,11 @@ namespace Lab6
     {
         public void Application_Startup(object sender, StartupEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
+
+            var model = new Bar();
+            MainWindow view = new MainWindow();
+            var controller = new BarController(view, model);
+            
         }
     }
 }
