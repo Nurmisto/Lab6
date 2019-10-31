@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Windows;
 
 namespace Lab6
@@ -15,6 +16,7 @@ namespace Lab6
             view.Show();
             view.OpenOrCloseThePub.Click += OpenOrCloseThePub_Click;
         }
+        
 
         public void SetTimeSlider()
         {
@@ -50,8 +52,11 @@ namespace Lab6
             if (startSimulation)
             {
                 //starta bouncer h´är istället
+                
+                
                 model.bouncer.GeneratePatrons();
-                foreach (var patron in model.patron.patronsQue)
+                Thread.Sleep(1000);
+                foreach (var patron in Patron.patronsQue)
                 {
                     if (patron.name != null)
                     {
@@ -67,10 +72,10 @@ namespace Lab6
         }
         
 
-        public void OpenOrCloseThePub()
-        {
-            
+        
 
+        private void OpenOrCloseThePub_Click(object sender, RoutedEventArgs e)
+        {
             if (!model.barOpen)
             {
                 StartSimulation(true);
@@ -80,11 +85,6 @@ namespace Lab6
             {
                 StartSimulation(false);
             }
-        }
-
-        private void OpenOrCloseThePub_Click(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
         //private void waitressPausOrContiniueButton_Click(object sender, RoutedEventArgs e)
