@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Lab6
 {
-     public class Bar
-     {
+    public class Bar
+    {
+        public Queue<Patron> patronsQue = new Queue<Patron>();
         public bool simulationStarted = false;
         public bool couplesNight;
-        public  bool barOpen = false;
+        public bool barOpen = false;
         public int NumberOfPatronsInBar { get; set; } = 0;
         public int NumberOfGlasses { get; set; } = 8;
         public int NumberOfSeats { get; set; } = 9;
@@ -19,14 +20,12 @@ namespace Lab6
         public Bartender bartender { get; set; }
         public Waitress waitress { get; set; }
         public Patron patron { get; set; }
-
+        
         public DateTime TimeStamp { get; set; }
-
+        
         public Bar()
         {
-            
-        }
-
         
+        }
     }
 }
