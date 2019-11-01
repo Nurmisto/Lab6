@@ -8,11 +8,9 @@ namespace Lab6
 {
     public class Bar
     {
-        public Queue<Patron> patronsQue = new Queue<Patron>();
         public bool simulationStarted = false;
         public bool couplesNight;
         public bool barOpen { get; set; }
-        public int NumberOfPatronsInBar { get; set; } = 0;
         public int NumberOfGlasses { get; set; } = 8;
         public int NumberOfSeats { get; set; } = 9;
         public double TimeUntillBarCloses;

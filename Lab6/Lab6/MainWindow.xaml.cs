@@ -26,8 +26,6 @@ namespace Lab6
         public MainWindow()
         {
             InitializeComponent();
-
-            //skapa bouncer och logsystem stoppa in log ststem i bouncern.
         }
         public void RefreshListboxes()
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace Lab6
@@ -36,14 +37,22 @@ namespace Lab6
                 Bartender bartender = new Bartender();
                 Waitress waitress = new Waitress();
                 Bouncer bouncer = new Bouncer();
-                
-                bouncer.GeneratePatrons();
-                Thread.Sleep(1000);
 
-                foreach (var patron in model.patronsQue)
+                Task.Factory.StartNew(() =>
                 {
-                    view.patronsEventListBox.Items.Add($"{patron.name} kom in och går till baren");
-                    view.RefreshListboxes();
+                    bouncer.GeneratePatrons();
+                });
+                
+                Thread.Sleep(5000);
+
+
+                foreach (var patron in bouncer.patronsQueue)
+                {
+                    if(patron.name != null)
+                    {
+                        view.patronsEventListBox.Items.Insert(0, $"{patron.name} kom in och går till baren");
+                        view.RefreshListboxes();
+                    }
                 }
             }
             else

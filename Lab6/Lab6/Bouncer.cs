@@ -1,36 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace Lab6
 {
     public class Bouncer : Bar
     {
+        public Queue<Patron> patronsQueue = new Queue<Patron>();
+        public int NumberOfPatronsInBar { get; set; } = 0;
         public Bouncer()
         {
              
         }
         public void GeneratePatrons()
         {
-            Task.Run(() => {
-                int x = 0;
+            barOpen = true;
+            Dispatcher.CurrentDispatcher.Invoke(() =>
+            {
                 while (barOpen)
                 {
-                    if (barOpen && x < 1)
-                    {
-                        //logSsytem.Log("bóuncer let patron in");
-                        patronsQue.Enqueue(new Patron());
-                        x++;
-                        Thread.Sleep(200);
-                    }
-                    else
-                    {
-                        Random newPatronTimer = new Random();
-                        Thread.Sleep(newPatronTimer.Next(200, 1000));
-                        patronsQue.Enqueue(new Patron());
-                        x++;
-                    }
+                    Thread.Sleep(2000);
+                    patronsQueue.Enqueue(new Patron());
+                    NumberOfPatronsInBar++;
+                    MessageBox.Show("PATRON CREATED");
                 }
             });
         }
