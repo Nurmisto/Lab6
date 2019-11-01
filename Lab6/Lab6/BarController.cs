@@ -38,22 +38,37 @@ namespace Lab6
                 Waitress waitress = new Waitress();
                 Bouncer bouncer = new Bouncer();
 
-                Task.Factory.StartNew(() =>
+                while (model.barOpen)
                 {
-                    bouncer.GeneratePatrons();
-                });
-                
-                Thread.Sleep(5000);
-
-
-                foreach (var patron in bouncer.patronsQueue)
-                {
-                    if(patron.name != null)
+                    Task.Factory.StartNew(() =>
                     {
-                        view.patronsEventListBox.Items.Insert(0, $"{patron.name} kom in och går till baren");
-                        view.RefreshListboxes();
+                        bouncer.GeneratePatrons();
+                    });
+                    Thread.Sleep(5000);
+                    MessageBox.Show("Nu har det thread sleepats 5 sec");
+                    foreach (var patron in bouncer.patronsQueue)
+                    {
+                        if (!patron.PatronWalkedToBar)
+                        {
+                            view.patronsEventListBox.Items.Insert(0, $"{patron.name} kom in och går till baren");
+                            patron.PatronWalkedToBar = true;
+                            view.RefreshListboxes();
+                        }
+                        Thread.Sleep(2000);
+                        MessageBox.Show("Nu har det thread sleepats 2 sec");
+                        if (patron.PatronWalkedToBar && !patron.HasBeenServedBeer)
+                        {
+                            view.bartenderEventListBox.Items.Insert(0, $"Bartender serverar öl till {patron.name}");
+                            patron.HasBeenServedBeer = true;
+                            view.RefreshListboxes();
+                        }
                     }
+                    
                 }
+
+
+
+
             }
             else
             {

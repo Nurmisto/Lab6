@@ -20,13 +20,10 @@ namespace Lab6
             barOpen = true;
             Dispatcher.CurrentDispatcher.Invoke(() =>
             {
-                while (barOpen)
-                {
-                    Thread.Sleep(2000);
-                    patronsQueue.Enqueue(new Patron());
-                    NumberOfPatronsInBar++;
-                    MessageBox.Show("PATRON CREATED");
-                }
+                Thread.Sleep(3000);
+                patronsQueue.Enqueue(new Patron(false, false));
+                NumberOfPatronsInBar++;
+                MessageBox.Show("PATRON CREATED");
             });
         }
     }
