@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace Lab6
 {
@@ -38,36 +39,22 @@ namespace Lab6
                 Waitress waitress = new Waitress();
                 Bouncer bouncer = new Bouncer();
 
-                while (model.barOpen)
+                var bouncerThread = new Thread(new ThreadStart(bouncer.GeneratePatrons));
+                bouncerThread.Start();
+
+                while(model.barOpen)
                 {
-                    Task.Factory.StartNew(() =>
+                    if(bouncer.patronsQueue.Count > 1)
                     {
-                        bouncer.GeneratePatrons();
-                    });
-                    Thread.Sleep(5000);
-                    MessageBox.Show("Nu har det thread sleepats 5 sec");
-                    foreach (var patron in bouncer.patronsQueue)
-                    {
-                        if (!patron.PatronWalkedToBar)
-                        {
-                            view.patronsEventListBox.Items.Insert(0, $"{patron.name} kom in och går till baren");
-                            patron.PatronWalkedToBar = true;
-                            view.RefreshListboxes();
-                        }
-                        Thread.Sleep(2000);
-                        MessageBox.Show("Nu har det thread sleepats 2 sec");
-                        if (patron.PatronWalkedToBar && !patron.HasBeenServedBeer)
-                        {
-                            view.bartenderEventListBox.Items.Insert(0, $"Bartender serverar öl till {patron.name}");
-                            patron.HasBeenServedBeer = true;
-                            view.RefreshListboxes();
-                        }
+                        MessageBox.Show("Mer än 1 i kö");
+                        view.patronsEventListBox.Items.Insert(0, $"{bouncer.GetAPatronWhoJustEntered().name} kom in och går till baren");
+                        view.RefreshListboxes();
                     }
-                    
+                    else
+                    {
+                        MessageBox.Show("INGEN I KÖ");
+                    }
                 }
-
-
-
 
             }
             else

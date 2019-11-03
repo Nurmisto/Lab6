@@ -26,6 +26,7 @@ namespace Lab6
         public MainWindow()
         {
             InitializeComponent();
+            UIOnBarClosed();
         }
         public void RefreshListboxes()
         {

@@ -10,7 +10,7 @@ namespace Lab6
     {
         public bool simulationStarted = false;
         public bool couplesNight;
-        public bool barOpen { get; set; }
+        public bool barOpen { get; set; } = false;
         public int NumberOfGlasses { get; set; } = 8;
         public int NumberOfSeats { get; set; } = 9;
         public double TimeUntillBarCloses;
@@ -20,7 +20,6 @@ namespace Lab6
         public Patron patron { get; set; }
         
         public DateTime TimeStamp { get; set; }
-        
         public Bar()
         {
         

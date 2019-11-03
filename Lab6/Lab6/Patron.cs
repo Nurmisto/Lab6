@@ -19,5 +19,6 @@ namespace Lab6
             int index = r.Next(patronNameList.Count);
             name = patronNameList[index];
         }
+
     }
 }
