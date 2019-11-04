@@ -45,7 +45,7 @@ namespace Lab6
                     while (model.barOpen)
                     {
                         bouncer.GeneratePatrons();
-                        Thread.Sleep(3000);
+                        bartender.StartWorking();
                         try
                         {
                             view.Dispatcher.Invoke(() =>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Windows;
 using System.Windows.Threading;
 
 namespace Lab6
@@ -30,5 +31,9 @@ namespace Lab6
             return null;
         }
 
+        internal void StartWorking()
+        {
+
+        }
     }
 }

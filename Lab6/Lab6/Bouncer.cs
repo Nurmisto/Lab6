@@ -17,21 +17,18 @@ namespace Lab6
         }
         public void GeneratePatrons()
         {
-
-            //Thread.Sleep(3000);
-            patronsQueue.Enqueue(new Patron(false, false));
+            Thread.Sleep(5000);
+            patronsQueue.Add(new Patron(false, false));
             NumberOfPatronsInBar++;
-            //MessageBox.Show(patronsQueue.Count.ToString());
-
         }
 
         public Patron GetAPatronWhoJustEntered()
         {
             foreach (var patron in patronsQueue)
             {
-                if(patron.name != null && !patron.PatronWalkedToBar)
+                if(patron.name != null && !patron.HasWalkedToBar)
                 {
-                    patron.PatronWalkedToBar = true;
+                    patron.HasWalkedToBar = true;
                     return patron;
                 }
             }

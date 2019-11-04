@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace Lab6
 {
     public class Bar
     {
+        public static BlockingCollection<Patron> patronsQueue = new BlockingCollection<Patron>(boundedCapacity: 10);
         public bool simulationStarted = false;
         public bool couplesNight;
         public bool barOpen { get; set; } = false;
@@ -19,10 +21,9 @@ namespace Lab6
         public Bartender bartender { get; set; }
         public Waitress waitress { get; set; }
         public Patron patron { get; set; }
-        public Queue<Patron> patronsQueue = new Queue<Patron>();
 
         public DateTime TimeStamp { get; set; }
-        public bool PatronWalkedToBar;
+        public bool HasWalkedToBar;
         public bool HasBeenServedBeer;
         public Bar()
         {

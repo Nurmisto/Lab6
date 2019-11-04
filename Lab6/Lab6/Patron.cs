@@ -13,7 +13,7 @@ namespace Lab6
 
         public Patron(bool patronWalkedToBar, bool hasBeenServedBeer)
         {
-            PatronWalkedToBar = patronWalkedToBar;
+            HasWalkedToBar = patronWalkedToBar;
             HasBeenServedBeer = hasBeenServedBeer;
             Random r = new Random();
             int index = r.Next(patronNameList.Count);
