@@ -60,6 +60,30 @@ namespace Lab6
                     }
                 });
 
+                Task.Run(() =>
+                {
+                    while (model.barOpen)
+                    {
+                        bartender.ServePatronBeer();
+                        try
+                        {
+                            if(Bar.patronsQueue.Count > 0)
+                            {
+                                view.Dispatcher.Invoke(() =>
+                                {
+                                    view.bartenderEventListBox.Items.Insert(0, $"{view.patronsEventListBox.Items.GetItemAt(0)} ");
+                                });
+                            }
+                            
+                        }
+                        catch (Exception)
+                        {
+
+                            throw;
+                        }
+                    }
+                });
+
             }
             else
             {
