@@ -9,8 +9,8 @@ namespace Lab6
                                                                 "John", "Jonas", "Karo", "Khosro", "Luna", "Marcus", "Nicklas", "Nils", "Petter", "Pontus", "Robin", "Simon", "Sofia", "Tijana",
                                                                 "Tommy", "Toni", "Wilhelm"};
         public string name;
-        public bool PatronWalkedToBar;
-        public bool HasBeenServedBeer;
+        
+
         public Patron(bool patronWalkedToBar, bool hasBeenServedBeer)
         {
             PatronWalkedToBar = patronWalkedToBar;

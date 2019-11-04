@@ -9,7 +9,7 @@ namespace Lab6
 {
     public class Bouncer : Bar
     {
-        public Queue<Patron> patronsQueue = new Queue<Patron>();
+        
         public int NumberOfPatronsInBar { get; set; } = 0;
         public Bouncer()
         {

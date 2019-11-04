@@ -17,6 +17,7 @@ namespace Lab6
             this.model = model;
             view.Show();
             view.OpenOrCloseThePub.Click += OpenOrCloseThePub_Click;
+            model.NumberOfCleanGlasses = model.NumberOfGlasses;
         }
         
 
@@ -45,18 +46,16 @@ namespace Lab6
                     {
                         bouncer.GeneratePatrons();
                         Thread.Sleep(3000);
-                        if (bouncer.patronsQueue.Count > 1)
+                        try
                         {
                             view.Dispatcher.Invoke(() =>
                             {
                                 view.patronsEventListBox.Items.Insert(0, $"{bouncer.GetAPatronWhoJustEntered().name} kom in och går till baren");
-                            });
-                            
 
+                            });
                         }
-                        else
+                        catch
                         {
-                            //MessageBox.Show("INGEN I KÖ");
                         }
                     }
                 });

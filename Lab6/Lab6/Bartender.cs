@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Windows.Threading;
 
 namespace Lab6
 {
@@ -11,10 +12,22 @@ namespace Lab6
 
         }
 
-        public string GetNextPatron(string patron)
+        public Patron ServePatronBeer()
         {
-            Thread.Sleep(200);
-            return patron;
+            foreach (var patron in patronsQueue)
+            {
+                if (!patron.HasBeenServedBeer)
+                {
+                    if (NumberOfGlasses > 0)
+                    {
+                        Thread.Sleep(3000);
+                        NumberOfGlasses--;
+                        patron.HasBeenServedBeer = true;
+                        return patron;
+                    }
+                }
+            }
+            return null;
         }
 
     }
