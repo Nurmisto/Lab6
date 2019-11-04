@@ -18,10 +18,10 @@ namespace Lab6
         public void GeneratePatrons()
         {
 
-            Thread.Sleep(3000);
+            //Thread.Sleep(3000);
             patronsQueue.Enqueue(new Patron(false, false));
             NumberOfPatronsInBar++;
-            MessageBox.Show(patronsQueue.Count.ToString());
+            //MessageBox.Show(patronsQueue.Count.ToString());
 
         }
 

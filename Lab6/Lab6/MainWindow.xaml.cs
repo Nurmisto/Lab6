@@ -28,13 +28,6 @@ namespace Lab6
             InitializeComponent();
             UIOnBarClosed();
         }
-        public void RefreshListboxes()
-        {
-            bartenderEventListBox.Items.Refresh();
-            waitressEventListBox.Items.Refresh();
-            patronsEventListBox.Items.Refresh();
-        }
-        
 
         public void UIOnBarOpen()
         {

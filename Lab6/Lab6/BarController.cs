@@ -39,32 +39,32 @@ namespace Lab6
                 Waitress waitress = new Waitress();
                 Bouncer bouncer = new Bouncer();
 
-                //var bouncerTask = new Task(new ThreadStart(bouncer.GeneratePatrons));
-                //bouncer.Start();
-                view.Dispatcher.Invoke(() =>
+                Task.Run(() =>
                 {
                     while (model.barOpen)
                     {
                         bouncer.GeneratePatrons();
+                        Thread.Sleep(3000);
                         if (bouncer.patronsQueue.Count > 1)
                         {
-                            view.patronsEventListBox.Items.Insert(0, $"{bouncer.GetAPatronWhoJustEntered().name} kom in och går till baren");
-                            //MessageBox.Show("Mer än 1 i kö");
-                            //view.patronsEventListBox.Items.Insert(0, $"{bouncer.GetAPatronWhoJustEntered().name} kom in och går till baren");
-                            //view.RefreshListboxes();
+                            view.Dispatcher.Invoke(() =>
+                            {
+                                view.patronsEventListBox.Items.Insert(0, $"{bouncer.GetAPatronWhoJustEntered().name} kom in och går till baren");
+                            });
+                            
+
                         }
                         else
                         {
-                            MessageBox.Show("INGEN I KÖ");
+                            //MessageBox.Show("INGEN I KÖ");
                         }
                     }
                 });
-                
 
             }
             else
             {
-                MessageBox.Show("Simulation ended");
+                //MessageBox.Show("Simulation ended");
             }
         }
         private void OpenOrCloseThePub_Click(object sender, RoutedEventArgs e)
@@ -72,14 +72,14 @@ namespace Lab6
             if (!model.barOpen)
             {
                 model.barOpen = true;
-                MessageBox.Show("Bar open");
+                //MessageBox.Show("Bar open");
                 view.UIOnBarOpen();
                 StartSimulation(true);
             }
             else if(model.barOpen)
             {
                 model.barOpen = false;
-                MessageBox.Show("Bar closed");
+                //MessageBox.Show("Bar closed");
                 view.UIOnBarClosed();
                 StartSimulation(false);
             }
