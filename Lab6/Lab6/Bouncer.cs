@@ -10,7 +10,7 @@ namespace Lab6
     public class Bouncer : Bar
     {
         
-        public int NumberOfPatronsInBar { get; set; } = 0;
+        
         public Bouncer()
         {
              

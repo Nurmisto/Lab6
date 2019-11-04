@@ -15,7 +15,7 @@ namespace Lab6
 
         public Patron ServePatronBeer()
         {
-            foreach (var patron in patronsQueue)
+            foreach (var patron in Bar.patronsQueue)
             {
                 if (!patron.HasBeenServedBeer)
                 {
@@ -28,6 +28,19 @@ namespace Lab6
                     }
                 }
             }
+            return null;
+        }
+        public string PatronAboutToBeServed()
+        {
+            Thread.Sleep(3000);
+            foreach (var patron in Bar.patronsQueue)
+            {
+                if (!patron.HasBeenServedBeer)
+                {
+                    return patron.name;
+                }
+            }
+
             return null;
         }
 

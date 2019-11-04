@@ -45,7 +45,7 @@ namespace Lab6
                     while (model.barOpen)
                     {
                         bouncer.GeneratePatrons();
-                        bartender.StartWorking();
+                        //bartender.StartWorking();
                         try
                         {
                             view.Dispatcher.Invoke(() =>
@@ -71,7 +71,7 @@ namespace Lab6
                             {
                                 view.Dispatcher.Invoke(() =>
                                 {
-                                    view.bartenderEventListBox.Items.Insert(0, $"{view.patronsEventListBox.Items.GetItemAt(0)} ");
+                                    view.bartenderEventListBox.Items.Insert(0, $"Häller upp öl till {bartender.PatronAboutToBeServed()}");
                                 });
                             }
                             
