@@ -17,17 +17,11 @@ namespace Lab6
         }
         public void GeneratePatrons()
         {
-            barOpen = true;
-            while (barOpen)
-            {
-                Dispatcher.CurrentDispatcher.Invoke(() =>
-                {
-                    Thread.Sleep(3000);
-                    patronsQueue.Enqueue(new Patron(false, false));
-                    NumberOfPatronsInBar++;
-                    MessageBox.Show(patronsQueue.Count.ToString());
-                });
-            }
+
+            Thread.Sleep(3000);
+            patronsQueue.Enqueue(new Patron(false, false));
+            NumberOfPatronsInBar++;
+            MessageBox.Show(patronsQueue.Count.ToString());
 
         }
 
