@@ -18,7 +18,7 @@ namespace Lab6
         public void GeneratePatrons()
         {
             Thread.Sleep(5000);
-            patronsQueue.Add(new Patron(false, false));
+            patronsQueue.Enqueue(new Patron(false, false));
             NumberOfPatronsInBar++;
         }
 

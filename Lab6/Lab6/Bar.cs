@@ -9,7 +9,7 @@ namespace Lab6
 {
     public class Bar
     {
-        public static BlockingCollection<Patron> patronsQueue = new BlockingCollection<Patron>(boundedCapacity: 10);
+        public static ConcurrentQueue<Patron> patronsQueue = new ConcurrentQueue<Patron>();
         public bool simulationStarted = false;
         public bool couplesNight;
         public bool barOpen { get; set; } = false;
