@@ -19,7 +19,7 @@ namespace Lab6
         {
             Thread.Sleep(5000);
             patronsQueue.Enqueue(new Patron(false, false));
-            NumberOfPatronsInBar++;
+            numberOfPatronsInBar.Add(1);
         }
 
         public Patron GetAPatronWhoJustEntered()

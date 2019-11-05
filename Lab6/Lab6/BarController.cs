@@ -16,11 +16,10 @@ namespace Lab6
             this.view = view;
             this.model = model;
             view.Show();
+            view.NumberOfGlasOnShelfLabel.Content = $"Det finns {Bar.NumberOfGlasses} glas i hyllan";
             view.OpenOrCloseThePub.Click += OpenOrCloseThePub_Click;
-            model.NumberOfCleanGlasses = model.NumberOfGlasses;
+            model.NumberOfCleanGlasses = Bar.NumberOfGlasses;
         }
-        
-
         public void SetTimeSlider()
         {
             if (!model.barOpen)
@@ -39,7 +38,6 @@ namespace Lab6
                 Bartender bartender = new Bartender();
                 Waitress waitress = new Waitress();
                 Bouncer bouncer = new Bouncer();
-
                 Task.Run(() =>
                 {
                     while (model.barOpen)
@@ -51,7 +49,6 @@ namespace Lab6
                             view.Dispatcher.Invoke(() =>
                             {
                                 view.patronsEventListBox.Items.Insert(0, $"{bouncer.GetAPatronWhoJustEntered().name} kom in och går till baren");
-
                             });
                         }
                         catch
@@ -64,15 +61,27 @@ namespace Lab6
                 {
                     while (model.barOpen)
                     {
-                        bartender.ServePatronBeer();
+                        bartender.GetPatronAboutToBeServed();
                         try
                         {
                             if(Bar.patronsQueue.Count > 0)
                             {
                                 view.Dispatcher.Invoke(() =>
                                 {
-                                    view.bartenderEventListBox.Items.Insert(0, $"Häller upp öl till {bartender.PatronAboutToBeServed()}");
-
+                                    if(Bar.NumberOfGlasses > 0)
+                                    {
+                                        view.bartenderEventListBox.Items.Insert(0, $"Häller upp öl till {bartender.PatronAboutToBeServed()}");
+                                        view.patronsEventListBox.Items.RemoveAt(0);
+                                        view.NumberOfGlasOnShelfLabel.Content = $"Det finns {Bar.NumberOfGlasses} glas i hyllan";
+                                    }
+                                });
+                            }
+                            else
+                            {
+                                view.Dispatcher.Invoke(() =>
+                                {
+                                    view.bartenderEventListBox.Items.Remove("Inväntar besökare");
+                                    view.bartenderEventListBox.Items.Insert(0, "Inväntar besökare");
                                 });
                             }
                             
@@ -96,14 +105,12 @@ namespace Lab6
             if (!model.barOpen)
             {
                 model.barOpen = true;
-                //MessageBox.Show("Bar open");
                 view.UIOnBarOpen();
                 StartSimulation(true);
             }
             else if(model.barOpen)
             {
                 model.barOpen = false;
-                //MessageBox.Show("Bar closed");
                 view.UIOnBarClosed();
                 StartSimulation(false);
             }

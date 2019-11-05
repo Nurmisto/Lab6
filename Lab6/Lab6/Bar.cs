@@ -10,14 +10,16 @@ namespace Lab6
     public class Bar
     {
         public static ConcurrentQueue<Patron> patronsQueue = new ConcurrentQueue<Patron>();
+        public BlockingCollection<int> numberOfPatronsInBar = new BlockingCollection<int>(boundedCapacity: 10);
+        //public BlockingCollection<int> shelfForGlasses = new BlockingCollection<int>(boundedCapacity: 8);
+
         public bool simulationStarted = false;
         public bool couplesNight;
         public bool barOpen { get; set; } = false;
-
-        public int NumberOfPatronsInBar { get; set; } = 0;
-        public int NumberOfGlasses { get; set; } = 8;
+        public static int NumberOfGlasses { get; set; } = 8;
         public int NumberOfCleanGlasses { get; set; }
         public int NumberOfSeats { get; set; } = 9;
+
         public double TimeUntillBarCloses;
         public Bouncer bouncer { get; set; }
         public Bartender bartender { get; set; }
