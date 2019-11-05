@@ -72,6 +72,7 @@ namespace Lab6
                                 view.Dispatcher.Invoke(() =>
                                 {
                                     view.bartenderEventListBox.Items.Insert(0, $"Häller upp öl till {bartender.PatronAboutToBeServed()}");
+
                                 });
                             }
                             

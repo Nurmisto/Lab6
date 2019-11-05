@@ -15,15 +15,14 @@ namespace Lab6
 
         public Patron ServePatronBeer()
         {
+            Thread.Sleep(2000);
             foreach (var patron in Bar.patronsQueue)
             {
                 if (!patron.HasBeenServedBeer)
                 {
                     if (NumberOfGlasses > 0)
                     {
-                        Thread.Sleep(3000);
                         NumberOfGlasses--;
-                        patron.HasBeenServedBeer = true;
                         return patron;
                     }
                 }
@@ -37,6 +36,7 @@ namespace Lab6
             {
                 if (!patron.HasBeenServedBeer)
                 {
+                    patron.HasBeenServedBeer = true;
                     return patron.name;
                 }
             }
