@@ -17,6 +17,7 @@ namespace Lab6
             this.model = model;
             view.Show();
             view.NumberOfGlasOnShelfLabel.Content = $"Det finns {Bar.NumberOfGlasses} glas i hyllan";
+            view.NumberOfPatronsInBarLabel.Content = $"Det finns {Bar.numberOfPatronsInBar.Count.ToString()} gäster i baren";
             view.OpenOrCloseThePub.Click += OpenOrCloseThePub_Click;
             model.NumberOfCleanGlasses = Bar.NumberOfGlasses;
         }
@@ -43,12 +44,12 @@ namespace Lab6
                     while (model.barOpen)
                     {
                         bouncer.GeneratePatrons();
-                        //bartender.StartWorking();
                         try
                         {
                             view.Dispatcher.Invoke(() =>
                             {
                                 view.patronsEventListBox.Items.Insert(0, $"{bouncer.GetAPatronWhoJustEntered().name} kom in och går till baren");
+                                view.NumberOfPatronsInBarLabel.Content = $"Det finns {Bar.numberOfPatronsInBar.Count.ToString()} gäster i baren";
                             });
                         }
                         catch
@@ -66,6 +67,7 @@ namespace Lab6
                         {
                             if(Bar.patronsQueue.Count > 0)
                             {
+                                Thread.Sleep(3000);
                                 view.Dispatcher.Invoke(() =>
                                 {
                                     if(Bar.NumberOfGlasses > 0)

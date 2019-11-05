@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
@@ -27,25 +28,33 @@ namespace Lab6
         }
         public string PatronAboutToBeServed()
         {
-            Thread.Sleep(3000);
-            foreach (var patron in Bar.patronsQueue)
+            var query = from patron in Bar.patronsQueue
+                        where patron.HasBeenServedBeer == false && patron.HasWalkedToBar
+                        select patron;
+            foreach (var patron in query)
             {
                 if (!patron.HasBeenServedBeer)
                 {
-                    if (NumberOfGlasses > 0)
-                    {
-                        NumberOfGlasses--;
-                        patron.HasBeenServedBeer = true;
-                        return patron.name;
-                    }
+                    NumberOfGlasses--;
+                    patron.HasBeenServedBeer = true;
+                    return patron.name;
                 }
             }
             return null;
-        }
-
-        internal void StartWorking()
-        {
-
+            
+            //foreach (var patron in Bar.patronsQueue)
+            //{
+            //    if (!patron.HasBeenServedBeer)
+            //    {
+            //        if (NumberOfGlasses > 0)
+            //        {
+            //            NumberOfGlasses--;
+            //            patron.HasBeenServedBeer = true;
+            //            return patron.name;
+            //        }
+            //    }
+            //}
+            //return null;
         }
     }
 }

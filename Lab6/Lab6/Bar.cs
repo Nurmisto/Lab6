@@ -10,7 +10,7 @@ namespace Lab6
     public class Bar
     {
         public static ConcurrentQueue<Patron> patronsQueue = new ConcurrentQueue<Patron>();
-        public BlockingCollection<int> numberOfPatronsInBar = new BlockingCollection<int>(boundedCapacity: 10);
+        public static BlockingCollection<int> numberOfPatronsInBar = new BlockingCollection<int>(boundedCapacity: 10);
         //public BlockingCollection<int> shelfForGlasses = new BlockingCollection<int>(boundedCapacity: 8);
 
         public bool simulationStarted = false;
@@ -24,9 +24,9 @@ namespace Lab6
         public Bouncer bouncer { get; set; }
         public Bartender bartender { get; set; }
         public Waitress waitress { get; set; }
-        public Patron patron { get; set; }
+        //public Patron patron { get; set; }
 
-        public DateTime TimeStamp { get; set; }
+        public DateTime TimeStamp { get; set; } = DateTime.Now;
         public bool HasWalkedToBar;
         public bool HasBeenServedBeer;
         public Bar()
