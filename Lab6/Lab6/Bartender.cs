@@ -19,7 +19,7 @@ namespace Lab6
             Thread.Sleep(2000);
             foreach (var patron in Bar.patronsQueue)
             {
-                if (!patron.HasBeenServedBeer && HasWalkedToBar)
+                if (!patron.HasBeenServedBeer && patron.HasWalkedToBar)
                 {
                     return patron;
                 }

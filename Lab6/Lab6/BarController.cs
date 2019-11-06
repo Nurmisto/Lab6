@@ -36,9 +36,9 @@ namespace Lab6
         {
             if (startSimulation)
             {
+                Bouncer bouncer = new Bouncer();
                 Bartender bartender = new Bartender();
                 Waitress waitress = new Waitress();
-                Bouncer bouncer = new Bouncer();
                 Task.Run(() =>
                 {
                     while (model.barOpen)
@@ -92,6 +92,23 @@ namespace Lab6
                         {
 
                             throw;
+                        }
+                    }
+                });
+                Task.Run(() =>
+                {
+                    while (model.barOpen)
+                    {
+                        waitress.ClearTheTables();
+                        try
+                        {
+                            view.Dispatcher.Invoke(() =>
+                            {
+
+                            });
+                        }
+                        catch
+                        {
                         }
                     }
                 });

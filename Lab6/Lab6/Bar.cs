@@ -21,17 +21,11 @@ namespace Lab6
         public int NumberOfSeats { get; set; } = 9;
 
         public double TimeUntillBarCloses;
-        public Bouncer bouncer { get; set; }
-        public Bartender bartender { get; set; }
-        public Waitress waitress { get; set; }
-        //public Patron patron { get; set; }
 
         public DateTime TimeStamp { get; set; } = DateTime.Now;
-        public bool HasWalkedToBar;
-        public bool HasBeenServedBeer;
         public Bar()
         {
-        
+
         }
     }
 }
