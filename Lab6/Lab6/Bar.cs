@@ -18,7 +18,7 @@ namespace Lab6
         public bool barOpen { get; set; } = false;
         public static int NumberOfGlasses { get; set; } = 8;
         public int NumberOfCleanGlasses { get; set; }
-        public int NumberOfSeats { get; set; } = 9;
+        public static int NumberOfSeats { get; set; } = 9;
 
         public double TimeUntillBarCloses;
 

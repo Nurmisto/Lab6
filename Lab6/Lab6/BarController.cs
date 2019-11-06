@@ -62,21 +62,24 @@ namespace Lab6
                 {
                     while (model.barOpen)
                     {
-                        bartender.GetPatronAboutToBeServed();
+                        Thread.Sleep(2000);
                         try
                         {
                             if(Bar.patronsQueue.Count > 0)
                             {
+                                string currentPatron = null;
+                                currentPatron = bartender.PatronAboutToBeServed().name;
                                 Thread.Sleep(3000);
                                 view.Dispatcher.Invoke(() =>
                                 {
                                     if(Bar.NumberOfGlasses > 0)
                                     {
-                                        view.bartenderEventListBox.Items.Insert(0, $"Häller upp öl till {bartender.PatronAboutToBeServed()}");
+                                        view.bartenderEventListBox.Items.Insert(0, $"Häller upp öl till {currentPatron}");
                                         view.patronsEventListBox.Items.RemoveAt(0);
                                         view.NumberOfGlasOnShelfLabel.Content = $"Det finns {Bar.NumberOfGlasses} glas i hyllan";
                                     }
                                 });
+
                             }
                             else
                             {
