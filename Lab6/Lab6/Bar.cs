@@ -21,8 +21,10 @@ namespace Lab6
         public static int NumberOfSeats { get; set; } = 9;
 
         public double TimeUntillBarCloses;
-
-        public DateTime TimeStamp { get; set; } = DateTime.Now;
+        public const int GetGlassTime = 3000;
+        public const int PourGlassTime = 3000;
+        public DateTime endTime;
+        
         public Bar()
         {
 

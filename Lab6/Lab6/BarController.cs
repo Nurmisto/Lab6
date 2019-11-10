@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,12 +21,15 @@ namespace Lab6
             view.NumberOfPatronsInBarLabel.Content = $"Det finns {Bar.numberOfPatronsInBar.Count.ToString()} gäster i baren";
             view.OpenOrCloseThePub.Click += OpenOrCloseThePub_Click;
             model.NumberOfCleanGlasses = Bar.NumberOfGlasses;
+
         }
         public void SetTimeSlider()
         {
             if (!model.barOpen)
             {
                 model.TimeUntillBarCloses = view.sliderValue.Value;
+                
+               
             }
             else
             {
@@ -34,8 +38,16 @@ namespace Lab6
         }
         public void StartSimulation(bool startSimulation)
         {
+            Stopwatch timer = new Stopwatch();
+            var seconds = 10;
+            var startCountdown = DateTime.UtcNow;
+            model.endTime = startCountdown.AddSeconds(seconds);
+
+            TimeSpan remaningTime = model.endTime - DateTime.UtcNow;
+
             if (startSimulation)
             {
+                timer.Start();
                 Bouncer bouncer = new Bouncer();
                 Bartender bartender = new Bartender();
                 Waitress waitress = new Waitress();
@@ -48,8 +60,12 @@ namespace Lab6
                         {
                             view.Dispatcher.Invoke(() =>
                             {
-                                view.patronsEventListBox.Items.Insert(0, $"{bouncer.GetAPatronWhoJustEntered().name} kom in och går till baren");
+                                view.patronsEventListBox.Items.Insert(0, $"{Math.Round(decimal.Parse(timer.Elapsed.TotalSeconds.ToString()), 3)} s: {bouncer.GetAPatronWhoJustEntered().name} kom in och går till baren");
                                 view.NumberOfPatronsInBarLabel.Content = $"Det finns {Bar.numberOfPatronsInBar.Count.ToString()} gäster i baren";
+                                if(remaningTime < TimeSpan.Zero)
+                                {
+                                    Thread.CurrentThread.Abort();
+                                }
                             });
                         }
                         catch
@@ -65,19 +81,27 @@ namespace Lab6
                         Thread.Sleep(2000);
                         try
                         {
-                            if(Bar.patronsQueue.Count > 0)
+                            if (Bar.patronsQueue.Count > 0 && Bar.NumberOfGlasses > 0)
                             {
                                 string currentPatron = null;
                                 currentPatron = bartender.PatronAboutToBeServed().name;
-                                Thread.Sleep(3000);
+
+                                //Thread.Sleep(3000);
                                 view.Dispatcher.Invoke(() =>
                                 {
-                                    if(Bar.NumberOfGlasses > 0)
-                                    {
-                                        view.bartenderEventListBox.Items.Insert(0, $"Häller upp öl till {currentPatron}");
-                                        view.patronsEventListBox.Items.RemoveAt(0);
-                                        view.NumberOfGlasOnShelfLabel.Content = $"Det finns {Bar.NumberOfGlasses} glas i hyllan";
-                                    }
+                                    view.bartenderEventListBox.Items.Insert(0, $"{Math.Round(decimal.Parse(timer.Elapsed.TotalSeconds.ToString()), 3)} s: Hämtar glas från hyllan");
+                                    view.NumberOfGlasOnShelfLabel.Content = $"Det finns {Bar.NumberOfGlasses} glas i hyllan";
+
+                                });
+                                Thread.Sleep(Bar.GetGlassTime);
+                                view.Dispatcher.Invoke(() =>
+                                {
+                                    view.bartenderEventListBox.Items.Insert(0, $"{Math.Round(decimal.Parse(timer.Elapsed.TotalSeconds.ToString()), 3)} s: Häller upp öl till {currentPatron}");
+                                });
+                                Thread.Sleep(Bar.PourGlassTime);
+                                view.Dispatcher.Invoke(() =>
+                                {
+                                    view.patronsEventListBox.Items.Insert(0, $"{Math.Round(decimal.Parse(timer.Elapsed.TotalSeconds.ToString()), 3)} s: {currentPatron} tar sin öl och letar efter bord");
                                 });
 
                             }
@@ -85,16 +109,15 @@ namespace Lab6
                             {
                                 view.Dispatcher.Invoke(() =>
                                 {
-                                    view.bartenderEventListBox.Items.Remove("Inväntar besökare");
-                                    view.bartenderEventListBox.Items.Insert(0, "Inväntar besökare");
+                                    view.bartenderEventListBox.Items.Insert(0, $"{Math.Round(decimal.Parse(timer.Elapsed.TotalSeconds.ToString()), 3)} s: Inväntar besökare");
                                 });
                             }
-                            
+
                         }
                         catch (Exception)
                         {
 
-                            throw;
+                            throw new Exception();
                         }
                     }
                 });
@@ -103,25 +126,31 @@ namespace Lab6
                     while (model.barOpen)
                     {
                         waitress.ClearTheTables();
-                        try
-                        {
-                            view.Dispatcher.Invoke(() =>
-                            {
+                        //try
+                        //{
+                        //    view.Dispatcher.Invoke(() =>
+                        //    {
 
-                            });
-                        }
-                        catch
-                        {
-                        }
+                        //    });
+                        //}
+                        //catch
+                        //{
+                        //}
                     }
                 });
 
             }
             else
             {
+                timer.Stop();
                 //MessageBox.Show("Simulation ended");
             }
+
+
+
         }
+
+
         private void OpenOrCloseThePub_Click(object sender, RoutedEventArgs e)
         {
             if (!model.barOpen)
