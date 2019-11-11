@@ -22,6 +22,8 @@ namespace Lab6
         public double TimeUntillBarCloses;
         public const int GetGlassTime = 3000;
         public const int PourGlassTime = 3000;
+        public const int LookForTableTime = 4000;
+        public const int DrinkBeerTime = 25000;
         public const int ClearTablesTime = 10000;
         public const int CleanGlassesTime = 15000;
         public DateTime endTime;

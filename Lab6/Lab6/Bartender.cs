@@ -33,6 +33,11 @@ namespace Lab6
             }
             return null;
         }
+        public void PatronLookingForTable()
+        {
+            int chair = 1;
+            availableChairs.TryTake(out chair, 15000);
+        }
 
         
     }

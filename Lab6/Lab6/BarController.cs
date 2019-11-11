@@ -23,6 +23,8 @@ namespace Lab6
             model.GenerateGlassesOnShelf();
 
             view.NumberOfGlasOnShelfLabel.Content = $"Det finns {Bar.shelfForGlasses.Count} glas i hyllan";
+            view.NumberOfVacantSeatsLabel.Content = $"Det finns {Bar.availableChairs.Count} stolar lediga";
+
             view.NumberOfPatronsInBarLabel.Content = $"Det finns {Bar.numberOfPatronsInBar.Count.ToString()} gäster i baren";
         }
         public void SetTimeSlider()
@@ -102,6 +104,14 @@ namespace Lab6
                                 {
                                     view.patronsEventListBox.Items.Insert(0, $"{Math.Round(decimal.Parse(timer.Elapsed.TotalSeconds.ToString()), 3)} s: {currentPatron} tar sin öl och letar efter bord");
                                 });
+                                //Thread.Sleep(Bar.LookForTableTime);
+                                //bartender.PatronLookingForTable();
+                                //view.Dispatcher.Invoke(() =>
+                                //{
+                                //    view.patronsEventListBox.Items.Insert(0, $"{Math.Round(decimal.Parse(timer.Elapsed.TotalSeconds.ToString()), 3)} s: {currentPatron} hittade en ledig stol och dricker sin öl.");
+                                //    view.NumberOfVacantSeatsLabel.Content = $"Det finns {Bar.availableChairs.Count} stolar lediga";
+                                //});
+                                //Thread.Sleep(Bar.DrinkBeerTime);
 
                             }
                             else if(Bar.shelfForGlasses.Count == 0)
@@ -122,7 +132,6 @@ namespace Lab6
                         }
                         catch (Exception)
                         {
-
                             throw new Exception();
                         }
                     }
@@ -131,24 +140,38 @@ namespace Lab6
                 {
                     while (model.barOpen)
                     {
-                        MessageBox.Show(Bar.glassesOnTables.Count.ToString());
                         int glassesOnTablesFound;
                         glassesOnTablesFound = waitress.ClearTheTables();
                         try
                         {
-                            view.Dispatcher.Invoke(() =>
+                            if(Bar.numberOfPatronsInBar.Count > 0)
                             {
-                                view.waitressEventListBox.Items.Insert(0, $"{Math.Round(decimal.Parse(timer.Elapsed.TotalSeconds.ToString()), 3)} s: Plockar glas från borden.");
-                            });
-                            Thread.Sleep(Bar.ClearTablesTime);
-                            view.Dispatcher.Invoke(() =>
-                            {
-                                view.waitressEventListBox.Items.Insert(0, $"{Math.Round(decimal.Parse(timer.Elapsed.TotalSeconds.ToString()), 3)} s: Hittade {glassesOnTablesFound} glas.");
-                            });
-                            Thread.Sleep(Bar.CleanGlassesTime);
+                                view.Dispatcher.Invoke(() =>
+                                {
+                                    view.waitressEventListBox.Items.Insert(0, $"{Math.Round(decimal.Parse(timer.Elapsed.TotalSeconds.ToString()), 3)} s: Plockar glas från borden.");
+                                });
+                                Thread.Sleep(Bar.ClearTablesTime);
+                                view.Dispatcher.Invoke(() =>
+                                {
+                                    view.waitressEventListBox.Items.Insert(0, $"{Math.Round(decimal.Parse(timer.Elapsed.TotalSeconds.ToString()), 3)} s: Hittade {glassesOnTablesFound} glas.");
+                                });
+                                Thread.Sleep(Bar.CleanGlassesTime);
+
+                                if(glassesOnTablesFound > 0)
+                                {
+                                    waitress.CleanGlasses(glassesOnTablesFound);
+                                    view.Dispatcher.Invoke(() =>
+                                    {
+                                        view.waitressEventListBox.Items.Insert(0, $"{Math.Round(decimal.Parse(timer.Elapsed.TotalSeconds.ToString()), 3)} s: {glassesOnTablesFound} glas har diskats och ställs på hyllan.");
+                                        view.NumberOfGlasOnShelfLabel.Content = $"Det finns {Bar.shelfForGlasses.Count} glas i hyllan";
+                                    });
+                                }
+                                Thread.Sleep(2000);
+                            }
                         }
-                        catch
+                        catch (Exception)
                         {
+                            throw new Exception();
                         }
                     }
                 });
@@ -159,9 +182,6 @@ namespace Lab6
                 timer.Stop();
                 //MessageBox.Show("Simulation ended");
             }
-
-
-
         }
 
 

@@ -15,6 +15,13 @@ namespace Lab6
             }
             return glassesOnTablesFound;
         }
+        public void CleanGlasses(int numberOfGlasses)
+        {
+            for (int i = 0; i < numberOfGlasses; i++)
+            {
+                shelfForGlasses.Add(1);
+            }
+        }
     }
 
 }
