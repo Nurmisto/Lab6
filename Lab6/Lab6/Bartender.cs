@@ -13,19 +13,6 @@ namespace Lab6
         {
 
         }
-
-        //public Patron GetPatronAboutToBeServed()
-        //{
-        //    Thread.Sleep(2000);
-        //    foreach (var patron in Bar.patronsQueue)
-        //    {
-        //        if (!patron.HasBeenServedBeer && patron.HasWalkedToBar)
-        //        {
-        //            return patron;
-        //        }
-        //    }
-        //    return null;
-        //}
         public Patron PatronAboutToBeServed()
         {
             var query = from patron in Bar.patronsQueue
@@ -35,9 +22,13 @@ namespace Lab6
             {
                 if (!patron.HasBeenServedBeer && patron.HasWalkedToBar)
                 {
-                    NumberOfGlasses--;
-                    patron.HasBeenServedBeer = true;
-                    return patron;
+                    int glass = 1;
+                    if(shelfForGlasses.TryTake(out glass))
+                    {
+                        glassesOnTables.Add(glass);
+                        patron.HasBeenServedBeer = true;
+                        return patron;
+                    }                    
                 }
             }
             return null;

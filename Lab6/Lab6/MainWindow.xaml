@@ -5,26 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab6"
         mc:Ignorable="d"
-        Title="The epic pub of epicness" Height="500" Width="900">
+        Title="The epic pub of epicness" Height="586.188" Width="924.033">
     <Grid>
-        <Label x:Name="Bartenderr" Content="Bartender" HorizontalAlignment="Left" Margin="60,40,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <Label x:Name="Waitressr" Content="Waitress" HorizontalAlignment="Left" Margin="260,40,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <Label x:Name="Patrons" Content="Patrons" HorizontalAlignment="Left" Margin="460,40,0,0" VerticalAlignment="Top" FontSize="16"/>
-        <Label x:Name="NumberOfPatronsInBar" HorizontalAlignment="Left" Margin="656,136,0,0" VerticalAlignment="Top" Width="89"/>
-        <Label x:Name="NumberOfVacantSeatsLabel" Content="testText" HorizontalAlignment="Left" Margin="656,198,0,0" VerticalAlignment="Top" Width="212"/>
-        <ListBox x:Name="bartenderEventListBox" HorizontalAlignment="Left" Height="200" Margin="60,71,0,0" VerticalAlignment="Top" Width="180"/>
-        <ListBox x:Name="waitressEventListBox" HorizontalAlignment="Left" Height="200" Margin="260,71,0,0" VerticalAlignment="Top" Width="180"/>
-        <ListBox x:Name="patronsEventListBox" HorizontalAlignment="Left" Height="200" Margin="460,71,0,0" VerticalAlignment="Top" Width="180"/>
-        <Button x:Name="bartenderPausOrContinueButton" Content="Paus/Continue" HorizontalAlignment="Left" Margin="60,276,0,0" VerticalAlignment="Top" Width="180" Height="30" FontSize="16"/>
-        <Button x:Name="waitressPausOrContinueButton" Content="Paus/Continue" HorizontalAlignment="Left" Margin="260,276,0,0" VerticalAlignment="Top" Width="180" Height="30" FontSize="16"/>
-        <Button x:Name="patronsPausOrContinueButton" Content="Paus/Continue" HorizontalAlignment="Left" Margin="460,276,0,0" VerticalAlignment="Top" Width="180" Height="30" FontSize="16"/>
-        <Button x:Name="OpenOrCloseThePub" Content="Open/close the pub" HorizontalAlignment="Left" Margin="60,311,0,0" VerticalAlignment="Top" Width="580" FontSize="16" Height="30"/>
-        <Button x:Name="shutdownAllThreads" Content="Panic button (press to stop all threads)" HorizontalAlignment="Left" Margin="570,389,0,0" VerticalAlignment="Top" Width="212" Background="#FFDDDDDD" Foreground="Red"/>
-        <TextBox x:Name="SliderValueTextBox" HorizontalAlignment="Left" Height="17" Margin="201,365,0,0" TextWrapping="Wrap" Text="{Binding ElementName=sliderValue,Path=Value,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="39" TextDecorations="{x:Null}"/>
-        <Slider x:Name="sliderValue" HorizontalAlignment="Left" Margin="26,389,0,0" VerticalAlignment="Top" Width="214" Maximum="500" Value="120"/>
-        <Label x:Name="label" Content="Time untill bar closes (seconds)" HorizontalAlignment="Left" Margin="26,361,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="NumberOfGlasOnShelfLabel" Content="testText" HorizontalAlignment="Left" Margin="656,167,0,0" VerticalAlignment="Top" Width="212"/>
-        <Label x:Name="NumberOfPatronsInBarLabel" Content="testText" HorizontalAlignment="Left" Margin="656,136,0,0" VerticalAlignment="Top" Width="212"/>
+        <Label x:Name="Bartenderr" Content="Bartender" HorizontalAlignment="Left" Margin="31,40,0,0" VerticalAlignment="Top" FontSize="16" Height="38" Width="91"/>
+        <Label x:Name="Waitressr" Content="Waitress" HorizontalAlignment="Left" Margin="262,40,0,0" VerticalAlignment="Top" FontSize="16" Height="38" Width="80"/>
+        <Label x:Name="Patrons" Content="Patrons" HorizontalAlignment="Left" Margin="496,40,0,0" VerticalAlignment="Top" FontSize="16" Height="38" Width="72"/>
+        <Label x:Name="NumberOfPatronsInBar" HorizontalAlignment="Left" Margin="713,161,0,0" VerticalAlignment="Top" Width="97" Height="12"/>
+        <Label x:Name="NumberOfVacantSeatsLabel" Content="testText" HorizontalAlignment="Left" Margin="713,238,0,0" VerticalAlignment="Top" Width="203" Height="32"/>
+        <ListBox x:Name="bartenderEventListBox" HorizontalAlignment="Left" Height="252" Margin="31,78,0,0" VerticalAlignment="Top" Width="208"/>
+        <ListBox x:Name="waitressEventListBox" HorizontalAlignment="Left" Height="252" Margin="262,78,0,0" VerticalAlignment="Top" Width="210"/>
+        <ListBox x:Name="patronsEventListBox" HorizontalAlignment="Left" Height="252" Margin="496,78,0,0" VerticalAlignment="Top" Width="209"/>
+        <Button x:Name="bartenderPausOrContinueButton" Content="Paus/Continue" HorizontalAlignment="Left" Margin="31,337,0,0" VerticalAlignment="Top" Width="208" Height="37" FontSize="16"/>
+        <Button x:Name="waitressPausOrContinueButton" Content="Paus/Continue" HorizontalAlignment="Left" Margin="262,337,0,0" VerticalAlignment="Top" Width="210" Height="37" FontSize="16"/>
+        <Button x:Name="patronsPausOrContinueButton" Content="Paus/Continue" HorizontalAlignment="Left" Margin="496,337,0,0" VerticalAlignment="Top" Width="209" Height="37" FontSize="16"/>
+        <Button x:Name="OpenOrCloseThePub" Content="Open/close the pub" HorizontalAlignment="Left" Margin="31,380,0,0" VerticalAlignment="Top" Width="674" FontSize="16" Height="38"/>
+        <Button x:Name="shutdownAllThreads" Content="Panic button (press to stop all threads)" HorizontalAlignment="Left" Margin="619,477,0,0" VerticalAlignment="Top" Width="231" Background="#FFDDDDDD" Foreground="Red" Height="26"/>
+        <TextBox x:Name="SliderValueTextBox" HorizontalAlignment="Left" Height="21" Margin="217,448,0,0" TextWrapping="Wrap" Text="{Binding ElementName=sliderValue,Path=Value,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="42" TextDecorations="{x:Null}"/>
+        <Slider x:Name="sliderValue" HorizontalAlignment="Left" Margin="26,477,0,0" VerticalAlignment="Top" Width="233" Maximum="500" Value="120" Height="24"/>
+        <Label x:Name="label" Content="Time untill bar closes (seconds)" HorizontalAlignment="Left" Margin="26,442,0,0" VerticalAlignment="Top" Height="33" Width="191"/>
+        <Label x:Name="NumberOfGlasOnShelfLabel" Content="testText" HorizontalAlignment="Left" Margin="713,199,0,0" VerticalAlignment="Top" Width="199" Height="31"/>
+        <Label x:Name="NumberOfPatronsInBarLabel" Content="testText" HorizontalAlignment="Left" Margin="713,161,0,0" VerticalAlignment="Top" Width="203" Height="33"/>
 
     </Grid>
 </Window>
