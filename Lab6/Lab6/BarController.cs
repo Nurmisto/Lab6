@@ -41,11 +41,8 @@ namespace Lab6
         public void StartSimulation(bool startSimulation)
         {
             Stopwatch timer = new Stopwatch();
-            var seconds = 10;
-            var startCountdown = DateTime.UtcNow;
-            model.endTime = startCountdown.AddSeconds(seconds);
+            
 
-            TimeSpan remaningTime = model.endTime - DateTime.UtcNow;
 
             if (startSimulation)
             {
@@ -53,33 +50,64 @@ namespace Lab6
                 Bouncer bouncer = new Bouncer();
                 Bartender bartender = new Bartender();
                 Waitress waitress = new Waitress();
-                Task.Run(() =>
+                model.TimeUntillBarCloses = 10;
+
+                var ts = new CancellationTokenSource();
+                CancellationToken ct = ts.Token;
+
+                Task.Run(() => // Time untill bar closes.
+                {
+                    while (model.barOpen)
+                    {
+                        if (model.TimeUntillBarCloses <= timer.Elapsed.TotalSeconds)
+                        {
+                            model.barOpen = false;
+                            view.Dispatcher.Invoke(() =>
+                            {
+                                view.UIOnBarClosed();
+                            });
+                            
+                            Thread.Sleep(20);
+                            ts.Cancel();
+                            timer.Stop();
+                        }
+                    }
+                });
+
+
+                Task.Run(() => // Generate new patrons
                 {
                     while (model.barOpen)
                     {
                         bouncer.GeneratePatrons();
+                        if (ct.IsCancellationRequested)
+                        {
+                            break;
+                        }
                         try
                         {
                             view.Dispatcher.Invoke(() =>
                             {
                                 view.patronsEventListBox.Items.Insert(0, $"{Math.Round(decimal.Parse(timer.Elapsed.TotalSeconds.ToString()), 3)} s: {bouncer.GetAPatronWhoJustEntered().name} kom in och går till baren");
                                 view.NumberOfPatronsInBarLabel.Content = $"Det finns {Bar.numberOfPatronsInBar.Count.ToString()} gäster i baren";
-                                if(remaningTime < TimeSpan.Zero)
-                                {
-                                    Thread.CurrentThread.Abort();
-                                }
+                                
                             });
                         }
                         catch
                         {
                         }
                     }
-                });
+                }, ct);
+                
 
-                Task.Run(() =>
+                Task.Run(() => // Bartender work
                 {
                     while (model.barOpen)
                     {
+                        if (ct.IsCancellationRequested)
+                        {
+                            break;
+                        }
                         Thread.Sleep(2000);
                         try
                         {
@@ -135,11 +163,16 @@ namespace Lab6
                             throw new Exception();
                         }
                     }
-                });
-                Task.Run(() =>
+                }, ct);
+
+                Task.Run(() => // Waitress work
                 {
                     while (model.barOpen)
                     {
+                        if (ct.IsCancellationRequested)
+                        {
+                            break;
+                        }
                         int glassesOnTablesFound;
                         glassesOnTablesFound = waitress.ClearTheTables();
                         try
@@ -174,13 +207,7 @@ namespace Lab6
                             throw new Exception();
                         }
                     }
-                });
-
-            }
-            else
-            {
-                timer.Stop();
-                //MessageBox.Show("Simulation ended");
+                }, ct);
             }
         }
 
