@@ -25,20 +25,26 @@ namespace Lab6
             //view.NumberOfPatronsInBarLabel.Content = $"Det finns {Bar.numberOfPatronsInBar.Count.ToString()} gäster i baren";
         }
         
+        public void StartSimulation()
+        {
+            model = new Bar(this);
+
+        }
+
         private void OpenOrCloseThePub_Click(object sender, RoutedEventArgs e)
         {
-            //if (!model.barOpen)
-            //{
-            //    model.barOpen = true;
-            //    view.UIOnBarOpen();
-            //    StartSimulation(true);
-            //}
-            //else if(model.barOpen)
-            //{
-            //    model.barOpen = false;
-            //    view.UIOnBarClosed();
-            //    StartSimulation(false);
-            //}
+            if (!model.BarOpen)
+            {
+                model.BarOpen = true;
+                view.UIOnBarOpen();
+                StartSimulation();
+            }
+            else if(model.BarOpen)
+            {
+                model.BarOpen = false;
+                view.UIOnBarClosed();
+
+            }
         }
 
     }

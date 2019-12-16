@@ -13,6 +13,7 @@ namespace Lab6
         private const int NumberOfGlasses = 8;
         private const int NumberOfChairs = 9;
         public const int TimeUntillBarCloses = 120;
+        public bool BarOpen { get; set; } = false;
         public Enum currentPubState { get; set; }
         public BarController BarController { get; set; }
         public Bartender Bartender { get; set; }
