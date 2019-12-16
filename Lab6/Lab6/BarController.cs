@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -29,6 +30,7 @@ namespace Lab6
         {
             model = new Bar(this);
 
+            model.StartAgents();
         }
 
         private void OpenOrCloseThePub_Click(object sender, RoutedEventArgs e)
@@ -46,6 +48,29 @@ namespace Lab6
 
             }
         }
-
+        public void EventListBoxHandler(Agent messageLogger, string message)
+        {
+            string messageInput = ": " + message;
+            if (messageLogger is Bartender)
+            {
+                view.Dispatcher.Invoke(() => view.bartenderEventListBox.Items.Insert(0, messageInput));
+            }
+            else if (messageLogger is Bouncer || messageLogger is Patron)
+            {
+                view.Dispatcher.Invoke(() => view.patronsEventListBox.Items.Insert(0, messageInput));
+            }
+            else if (messageLogger is Waitress)
+            {
+                view.Dispatcher.Invoke(() => view.waitressEventListBox.Items.Insert(0, messageInput));
+            }
+        }
+        public void RefreshLabels()
+        {
+            view.Dispatcher.Invoke(() => view.NumberOfGlasOnShelfLabel.Content = "Glasses on shelf: " + model.shelfForGlasses.Count);
+            view.Dispatcher.Invoke(() => view.NumberOfPatronsInBarLabel.Content = "Patrons: " + model.patronsQueue.Count);
+            view.Dispatcher.Invoke(() => view.NumberOfVacantSeatsLabel.Content = "Available chairs: " + (from chair in model.availableChairs
+                                                                                                         where chair.IsAvailable
+                                                                                                         select chair).Count());
+        }
     }
 }

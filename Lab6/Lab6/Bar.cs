@@ -14,7 +14,7 @@ namespace Lab6
         private const int NumberOfChairs = 9;
         public const int TimeUntillBarCloses = 120;
         public bool BarOpen { get; set; } = false;
-        public Enum currentPubState { get; set; }
+        public Enum currentBarState { get; set; }
         public BarController BarController { get; set; }
         public Bartender Bartender { get; set; }
         public Bouncer Bouncer { get; set; }
@@ -34,7 +34,7 @@ namespace Lab6
         public Bar(BarController barController)
         {
             BarController = barController;
-            currentPubState = BarState.Open;
+            currentBarState = BarState.Open;
             GenerateGlasses();
             GenerateChairs();
             Bartender = new Bartender(this);
