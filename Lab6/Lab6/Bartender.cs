@@ -7,38 +7,22 @@ using System.Windows.Threading;
 
 namespace Lab6
 {
-    public class Bartender : Bar
+    public class Bartender : Agent
     {
-        public Bartender()
+        public Bartender(Bar bar)
+        {
+            Bar = bar;
+            BarController = bar.BarController;
+        }
+
+        public override void AgentCycle(Bar bar)
         {
 
         }
-        public Patron PatronAboutToBeServed()
-        {
-            var query = from patron in Bar.patronsQueue
-                        where patron.HasBeenServedBeer == false && patron.HasWalkedToBar
-                        select patron;
-            foreach (var patron in query)
-            {
-                if (!patron.HasBeenServedBeer && patron.HasWalkedToBar)
-                {
-                    int glass = 1;
-                    if(shelfForGlasses.TryTake(out glass))
-                    {
-                        glassesOnTables.Add(glass);
-                        patron.HasBeenServedBeer = true;
-                        return patron;
-                    }                    
-                }
-            }
-            return null;
-        }
-        public void PatronLookingForTable()
-        {
-            int chair = 1;
-            availableChairs.TryTake(out chair, 15000);
-        }
 
-        
+        public RunState CheckState(Bar bar)
+        {
+
+        }
     }
 }

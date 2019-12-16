@@ -7,22 +7,60 @@ using System.Threading.Tasks;
 
 namespace Lab6
 {
+    public enum BarState { Open, Closed }
     public class Bar
     {
-        public static ConcurrentQueue<Patron> patronsQueue = new ConcurrentQueue<Patron>();
-        public static BlockingCollection<int> numberOfPatronsInBar = new BlockingCollection<int>(boundedCapacity: 10);
-        public static BlockingCollection<int> shelfForGlasses = new BlockingCollection<int>;//(boundedCapacity: 8);
-        public static BlockingCollection<int> glassesOnTables = new BlockingCollection<int>;//();
-        public static BlockingCollection<int> availableChairs = new BlockingCollection<int>;//(boundedCapacity: 9);
+        private const int NumberOfGlasses = 8;
+        private const int NumberOfChairs = 9;
+        public const int TimeUntillBarCloses = 120;
+        public Enum currentPubState { get; set; }
+        public BarController BarController { get; set; }
+        public Bartender Bartender { get; set; }
+        public Bouncer Bouncer { get; set; }
+        public Waitress Waitress { get; set; }
 
-        public double TimeUntillBarCloses;
+        public ConcurrentQueue<Patron> patronsQueue = new ConcurrentQueue<Patron>();
+        public ConcurrentQueue<Patron> PatronsWaitingForBeer = new ConcurrentQueue<Patron>();
+        public ConcurrentQueue<Patron> PatronsWaitingForChair = new ConcurrentQueue<Patron>();
+
+        public BlockingCollection<Glass> shelfForGlasses = new BlockingCollection<Glass>();
+        public BlockingCollection<Glass> glassesOnTables = new BlockingCollection<Glass>();
+        public BlockingCollection<Chair> availableChairs = new BlockingCollection<Chair>();
+
         public DateTime endTime;
 
         
-        public Bar()
+        public Bar(BarController barController)
         {
-
+            BarController = barController;
+            currentPubState = BarState.Open;
+            GenerateGlasses();
+            GenerateChairs();
+            Bartender = new Bartender(this);
+            Bouncer = new Bouncer(this);
+            Waitress = new Waitress(this);
         }
-        
+
+        public void GenerateGlasses()
+        {
+            for (int i = 0; i < NumberOfGlasses; i++)
+            {
+                shelfForGlasses.Add(new Glass());
+            }
+        }
+        public void GenerateChairs()
+        {
+            for (int i = 0; i < NumberOfChairs; i++)
+            {
+                availableChairs.Add(new Chair());
+            }
+        }
+        public void StartAgents()
+        {
+            Bartender.Run(this);
+            Bouncer.Run(this);
+            Waitress.Run(this);
+        }
+
     }
 }

@@ -7,32 +7,23 @@ using System.Windows.Threading;
 
 namespace Lab6
 {
-    public class Bouncer : Bar
+    public class Bouncer : Agent
     {
         
         
-        public Bouncer()
+        public Bouncer(Bar bar)
         {
-             
-        }
-        public void GeneratePatrons()
-        {
-            Thread.Sleep(5000);
-            patronsQueue.Enqueue(new Patron(false, false));
-            numberOfPatronsInBar.Add(1);
+            Bar = bar;
+            BarController = bar.BarController;
         }
 
-        public Patron GetAPatronWhoJustEntered()
+        public override void AgentCycle(Bar bar)
         {
-            foreach (var patron in patronsQueue)
-            {
-                if(patron.name != null && !patron.HasWalkedToBar)
-                {
-                    patron.HasWalkedToBar = true;
-                    return patron;
-                }
-            }
-            return null;
+
+        }
+        public RunState CheckState(Bar bar)
+        {
+
         }
     }
 }

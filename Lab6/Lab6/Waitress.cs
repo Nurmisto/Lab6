@@ -2,25 +2,22 @@
 
 namespace Lab6
 {
-
-    public class Waitress : Bar
+    public class Waitress : Agent
     {
-        public int ClearTheTables()
+        public Waitress(Bar bar)
         {
-            int glassesOnTablesFound = glassesOnTables.Count;
-            int glass = 1;
-            for (int i = 0; i < glassesOnTablesFound; i++)
-            {
-                glassesOnTables.TryTake(out glass);
-            }
-            return glassesOnTablesFound;
+            Bar = bar;
+            BarController = bar.BarController;
         }
-        public void CleanGlasses(int numberOfGlasses)
+
+        public override void AgentCycle(Bar bar)
         {
-            for (int i = 0; i < numberOfGlasses; i++)
-            {
-                shelfForGlasses.Add(1);
-            }
+
+        }
+
+        public RunState CheckState(Bar bar)
+        {
+
         }
     }
 

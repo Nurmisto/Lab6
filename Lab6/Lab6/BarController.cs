@@ -7,7 +7,7 @@ using System.Windows.Threading;
 
 namespace Lab6
 {
-    internal partial class BarController
+    public class BarController
     {
         private MainWindow view;
         private Bar model;
@@ -19,29 +19,26 @@ namespace Lab6
             view.Show();
             view.OpenOrCloseThePub.Click += OpenOrCloseThePub_Click;
 
-            model.GenerateChairsInBar();
-            model.GenerateGlassesOnShelf();
-
-            view.NumberOfGlasOnShelfLabel.Content = $"Det finns {Bar.shelfForGlasses.Count} glas i hyllan";
-            view.NumberOfVacantSeatsLabel.Content = $"Det finns {Bar.availableChairs.Count} stolar lediga";
-
-            view.NumberOfPatronsInBarLabel.Content = $"Det finns {Bar.numberOfPatronsInBar.Count.ToString()} gäster i baren";
+            //view.NumberOfGlasOnShelfLabel.Content = $"Det finns {Bar.shelfForGlasses.Count} glas i hyllan";
+            //view.NumberOfVacantSeatsLabel.Content = $"Det finns {Bar.availableChairs.Count} stolar lediga";
+            //
+            //view.NumberOfPatronsInBarLabel.Content = $"Det finns {Bar.numberOfPatronsInBar.Count.ToString()} gäster i baren";
         }
         
         private void OpenOrCloseThePub_Click(object sender, RoutedEventArgs e)
         {
-            if (!model.barOpen)
-            {
-                model.barOpen = true;
-                view.UIOnBarOpen();
-                StartSimulation(true);
-            }
-            else if(model.barOpen)
-            {
-                model.barOpen = false;
-                view.UIOnBarClosed();
-                StartSimulation(false);
-            }
+            //if (!model.barOpen)
+            //{
+            //    model.barOpen = true;
+            //    view.UIOnBarOpen();
+            //    StartSimulation(true);
+            //}
+            //else if(model.barOpen)
+            //{
+            //    model.barOpen = false;
+            //    view.UIOnBarClosed();
+            //    StartSimulation(false);
+            //}
         }
 
     }
