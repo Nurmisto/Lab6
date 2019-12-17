@@ -29,39 +29,26 @@ namespace Lab6
         public Bouncer Bouncer { get; set; }
         public Waitress Waitress { get; set; }
 
-        public ConcurrentDictionary<String, Patron> patronsQueue;
-        public ConcurrentQueue<Patron> PatronsWaitingForBeer;
-        public ConcurrentQueue<Patron> PatronsWaitingForChair;
+        public ConcurrentDictionary<String, Patron> patronsQueue = new ConcurrentDictionary<String, Patron>();
+        public ConcurrentQueue<Patron> PatronsWaitingForBeer = new ConcurrentQueue<Patron>();
+        public ConcurrentQueue<Patron> PatronsWaitingForChair = new ConcurrentQueue<Patron>();
 
-        public BlockingCollection<Glass> shelfForGlasses;
-        public BlockingCollection<Glass> glassesOnTables;
-        public BlockingCollection<Chair> availableChairs;
+        public BlockingCollection<Glass> shelfForGlasses = new BlockingCollection<Glass>();
+        public BlockingCollection<Glass> glassesOnTables = new BlockingCollection<Glass>();
+        public BlockingCollection<Chair> availableChairs = new BlockingCollection<Chair>();
 
         public DateTime endTime;
-
 
         public Bar(BarController barController)
         {
             BarController = barController;
             currentBarState = BarState.Open;
-
-            PatronsWaitingForBeer = new ConcurrentQueue<Patron>();
-            PatronsWaitingForChair = new ConcurrentQueue<Patron>();
-            patronsQueue = new ConcurrentDictionary<String, Patron>();
-
-            glassesOnTables = new BlockingCollection<Glass>();
-            shelfForGlasses = new BlockingCollection<Glass>();
-            availableChairs = new BlockingCollection<Chair>();
-
             GenerateGlasses();
             GenerateChairs();
             Bartender = new Bartender(this);
             Bouncer = new Bouncer(this);
             Waitress = new Waitress(this);
         }
-
-
-
         public void GenerateGlasses()
         {
             for (int i = 0; i < NumberOfGlasses; i++)

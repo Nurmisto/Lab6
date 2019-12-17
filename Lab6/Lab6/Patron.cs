@@ -23,25 +23,20 @@ namespace Lab6
 
         public Patron(Bar bar)
         {
-            //Random r = new Random();
-            //int index = r.Next(patronNameList.Count);
-            //Name = patronNameList[index];
             Bar = bar;
             BarController = bar.BarController;
-
-            Random rnd = new Random();
-            Name = GetRandomPatronName(rnd);
-
+            Name = GetRandomPatronName();
             CurrentState = RunState.WalkingToBar;
 
             Run(bar);
         }
-        public static string GetRandomPatronName(Random rnd)
+        public static string GetRandomPatronName()
         {
-            int randomIndex = rnd.Next(0, patronNameList.Count);
-            string randomName = patronNameList.ElementAt(randomIndex);
-            patronNameList.RemoveAt(randomIndex);
-            return randomName;
+            Random r = new Random();
+            int index = r.Next(patronNameList.Count);
+            string patronName = patronNameList[index];
+            patronNameList.RemoveAt(index);
+            return patronName;
         }
 
         public override void AgentCycle(Bar bar)
@@ -64,7 +59,7 @@ namespace Lab6
                             BarController.EventListBoxHandler(this, $"{Name} is waiting for a pint of beer");
                             while (glass is null)
                             {
-                                Thread.Sleep(TimeSpentWaiting); // Give the bartender som time before trying again
+                                Thread.Sleep(TimeSpentWaiting);
                             }
                             BarController.EventListBoxHandler(this, $"{Name} got a pint of beer");
                             DequeuePatron(CurrentQueue, this);
@@ -82,8 +77,8 @@ namespace Lab6
                             {
                                 //Spend time checking
                                 Thread.Sleep(TimeSpentWaiting);
-                                bar.PatronsWaitingForChair.TryPeek(out var result);
-                                if (this.Equals(result))
+                                bar.PatronsWaitingForChair.TryPeek(out var firstPatronInQueue);
+                                if (this.Equals(firstPatronInQueue))
                                 {
                                     isFirstInQueue = true;
                                     while (chair is null)
@@ -112,12 +107,10 @@ namespace Lab6
                         }
                     case RunState.DrinkingBeer:
                         {
-                            //Drink beer
                             BarController.EventListBoxHandler(this, $"{Name} is drinking a pint of beer");
                             Thread.Sleep(TimeSpentDrinkingBeer);
                             glass.HasBeer = false;
 
-                            //Place empty glass on table
                             bar.glassesOnTables.Add(glass);
                             chair.IsAvailable = true;
                             CurrentState = RunState.LeavingThePub;
@@ -125,7 +118,6 @@ namespace Lab6
                         }
                     case RunState.LeavingThePub:
                         {
-                            //Remove patron from pub
                             BarController.EventListBoxHandler(this, $"{Name} finished the beer and is going home");
                             while (hasGoneHome is false)
                             {
@@ -138,7 +130,7 @@ namespace Lab6
             }
         }
 
-        private Patron DequeuePatron(ConcurrentQueue<Patron> currentQueue, Patron patronAboutToLeave)
+        private Patron DequeuePatron(ConcurrentQueue<Patron> currentQueue, Patron patronToDequeue)
         {
             Patron patron = null;
             while(patron is null)

@@ -20,11 +20,6 @@ namespace Lab6
         public BarController(MainWindow view)
         {
             MainWindow = view;
-
-            //view.NumberOfGlasOnShelfLabel.Content = $"Det finns {Bar.shelfForGlasses.Count} glas i hyllan";
-            //view.NumberOfVacantSeatsLabel.Content = $"Det finns {Bar.availableChairs.Count} stolar lediga";
-            //
-            //view.NumberOfPatronsInBarLabel.Content = $"Det finns {Bar.numberOfPatronsInBar.Count.ToString()} gäster i baren";
         }
         
         public void StartSimulation()
@@ -53,24 +48,10 @@ namespace Lab6
             model.StartAgents();
         }
 
-        //private void OpenOrCloseThePub_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (!model.BarOpen)
-        //    {
-        //        model.BarOpen = true;
-        //        MainWindow.UIOnBarOpen();
-        //        StartSimulation();
-        //    }
-        //    else if(model.BarOpen)
-        //    {
-        //        model.BarOpen = false;
-        //        MainWindow.UIOnBarClosed();
-
-        //    }
-        //}
         public void EventListBoxHandler(Agent messageLogger, string message)
         {
-            string messageInput = ": " + message;
+            logCount++;
+            string messageInput = logCount + ": " + message;
             if (messageLogger is Bartender)
             {
                 MainWindow.Dispatcher.Invoke(() => MainWindow.bartenderEventListBox.Items.Insert(0, messageInput));

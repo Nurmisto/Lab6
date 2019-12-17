@@ -27,6 +27,10 @@ namespace Lab6
         {
             InitializeComponent();
             barController = new BarController(this);
+            NumberOfGlasOnShelfLabel.Content = "-";
+            NumberOfPatronsInBarLabel.Content = "-";
+            NumberOfVacantSeatsLabel.Content = "-";
+            TimeUntillClosed.Content = "-";
             UIOnBarClosed();
         }
 

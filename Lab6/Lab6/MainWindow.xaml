@@ -11,14 +11,14 @@
         <Label x:Name="Waitressr" Content="Waitress" HorizontalAlignment="Left" Margin="342,40,0,0" VerticalAlignment="Top" FontSize="16" Height="38" Width="80"/>
         <Label x:Name="Patrons" Content="Patrons" HorizontalAlignment="Left" Margin="657,35,0,0" VerticalAlignment="Top" FontSize="16" Height="38" Width="72"/>
         <Label x:Name="NumberOfPatronsInBar" HorizontalAlignment="Left" Margin="713,161,0,0" VerticalAlignment="Top" Width="97" Height="12"/>
-        <Label x:Name="NumberOfVacantSeatsLabel" Content="testText" HorizontalAlignment="Left" Margin="977,212,0,0" VerticalAlignment="Top" Width="203" Height="32"/>
+        <Label x:Name="NumberOfVacantSeatsLabel" Content="testText" HorizontalAlignment="Left" Margin="958,220,0,0" VerticalAlignment="Top" Width="203" Height="32"/>
         <ListBox x:Name="bartenderEventListBox" HorizontalAlignment="Left" Height="252" Margin="31,78,0,0" VerticalAlignment="Top" Width="280"/>
         <ListBox x:Name="waitressEventListBox" HorizontalAlignment="Left" Height="252" Margin="342,78,0,0" VerticalAlignment="Top" Width="280"/>
         <ListBox x:Name="patronsEventListBox" HorizontalAlignment="Left" Height="252" Margin="657,78,0,0" VerticalAlignment="Top" Width="280"/>
         <Button x:Name="OpenOrCloseThePub" Content="Open/close the pub" HorizontalAlignment="Left" Margin="31,360,0,0" VerticalAlignment="Top" Width="306" FontSize="16" Height="38" Click="OpenOrCloseThePub_Click_1"/>
-        <Label x:Name="TimeUntillClosed" Content="Time untill bar closes (seconds)" HorizontalAlignment="Left" Margin="977,249,0,0" VerticalAlignment="Top" Height="33" Width="191"/>
-        <Label x:Name="NumberOfGlasOnShelfLabel" Content="testText" HorizontalAlignment="Left" Margin="981,181,0,0" VerticalAlignment="Top" Width="199" Height="31"/>
-        <Label x:Name="NumberOfPatronsInBarLabel" Content="testText" HorizontalAlignment="Left" Margin="981,143,0,0" VerticalAlignment="Top" Width="203" Height="33"/>
+        <Label x:Name="TimeUntillClosed" Content="Time untill bar closes (seconds)" HorizontalAlignment="Left" Margin="958,298,0,0" VerticalAlignment="Top" Height="32" Width="192"/>
+        <Label x:Name="NumberOfGlasOnShelfLabel" Content="testText" HorizontalAlignment="Left" Margin="958,155,0,0" VerticalAlignment="Top" Width="199" Height="31"/>
+        <Label x:Name="NumberOfPatronsInBarLabel" Content="testText" HorizontalAlignment="Left" Margin="958,93,0,0" VerticalAlignment="Top" Width="203" Height="34"/>
 
     </Grid>
 </Window>
