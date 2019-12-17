@@ -30,7 +30,7 @@ namespace Lab6
                             if (hasBeenProductive)
                             {
                                 if (bar.PatronsWaitingForBeer.IsEmpty) BarController.EventListBoxHandler(this, "Waiting for a patron");
-                                else if (bar.shelfForGlasses.Count == 0) BarController.EventListBoxHandler(this, "Waiting for clean pints");
+                                else if (bar.shelfForGlasses.Count is 0) BarController.EventListBoxHandler(this, "Waiting for clean pints");
                             }
                             hasBeenProductive = false;
                             Thread.Sleep(100);
@@ -39,16 +39,16 @@ namespace Lab6
                     case RunState.Working:
                         {
                             Patron patronWaitingToBeServed = null;
-                            while(patronWaitingToBeServed == null)
+                            while(patronWaitingToBeServed is null)
                             {
                                 bar.PatronsWaitingForBeer.TryPeek(out patronWaitingToBeServed);
                             }
-                            if(patronWaitingToBeServed.glass == null)
+                            if(patronWaitingToBeServed.glass is null)
                             {
                                 BarController.EventListBoxHandler(this, $"Taking order from {patronWaitingToBeServed.Name}");
 
                                 //Get clean glass from Shelves
-                                while (glassInBar == null)
+                                while (glassInBar is null)
                                 {
                                     bar.shelfForGlasses.TryTake(out glassInBar);
                                 }
@@ -62,7 +62,7 @@ namespace Lab6
                                 Thread.Sleep(TimeSpentFillingGlassWithBeer);
 
                                 //Give glass to customer
-                                glassInBar = patronWaitingToBeServed.glass;
+                                patronWaitingToBeServed.glass = glassInBar;
                                 BarController.EventListBoxHandler(this, $"Giving beer to {patronWaitingToBeServed.Name}");
                                 glassInBar = null;
                                 hasBeenProductive = true;
