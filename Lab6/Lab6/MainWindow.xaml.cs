@@ -42,6 +42,12 @@ namespace Lab6
        
         }
 
-        
+        private void OpenOrCloseThePub_Click(object sender, RoutedEventArgs e)
+        {
+
+            barController.StartSimulation();
+        }
+
+
     }
 }

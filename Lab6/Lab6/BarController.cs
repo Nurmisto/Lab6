@@ -12,6 +12,10 @@ namespace Lab6
     {
         private MainWindow MainWindow { get; set; }
         private Bar model;
+        public TimeSpan time;
+        private DispatcherTimer timer;
+        private int logCount = 0;
+
 
         public BarController(MainWindow view)
         {
@@ -25,47 +29,66 @@ namespace Lab6
         
         public void StartSimulation()
         {
+            //model = new Bar(this);
+            //model.StartAgents();
             model = new Bar(this);
+            time = TimeSpan.FromSeconds(Bar.TimeUntillBarCloses);
+            timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
+            {
+                MainWindow.TimeUntillClosed.Content = time.ToString("c");
+                if (time == TimeSpan.Zero && model.currentBarState is BarState.Open)
+                {
+                    model.currentBarState = BarState.Closed;
+                }
+                if (
+                    model.currentBarState is BarState.Closed &&
+                    model.Bartender.hasGoneHome is true &&
+                    model.Bouncer.hasGoneHome is true &&
+                    model.Waitress.hasGoneHome is true
+                    ) timer.Stop();
+                time = time.Add(TimeSpan.FromSeconds(-1));
 
+                RefreshLabels();
+            }, Application.Current.Dispatcher);
             model.StartAgents();
         }
 
-        private void OpenOrCloseThePub_Click(object sender, RoutedEventArgs e)
-        {
-            if (!model.BarOpen)
-            {
-                model.BarOpen = true;
-                view.UIOnBarOpen();
-                StartSimulation();
-            }
-            else if(model.BarOpen)
-            {
-                model.BarOpen = false;
-                view.UIOnBarClosed();
+        //private void OpenOrCloseThePub_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (!model.BarOpen)
+        //    {
+        //        model.BarOpen = true;
+        //        MainWindow.UIOnBarOpen();
+        //        StartSimulation();
+        //    }
+        //    else if(model.BarOpen)
+        //    {
+        //        model.BarOpen = false;
+        //        MainWindow.UIOnBarClosed();
 
-            }
-        }
+        //    }
+        //}
         public void EventListBoxHandler(Agent messageLogger, string message)
         {
             string messageInput = ": " + message;
             if (messageLogger is Bartender)
             {
-                view.Dispatcher.Invoke(() => view.bartenderEventListBox.Items.Insert(0, messageInput));
+                MainWindow.Dispatcher.Invoke(() => MainWindow.bartenderEventListBox.Items.Insert(0, messageInput));
             }
             else if (messageLogger is Bouncer || messageLogger is Patron)
             {
-                view.Dispatcher.Invoke(() => view.patronsEventListBox.Items.Insert(0, messageInput));
+                MainWindow.Dispatcher.Invoke(() => MainWindow.patronsEventListBox.Items.Insert(0, messageInput));
             }
             else if (messageLogger is Waitress)
             {
-                view.Dispatcher.Invoke(() => view.waitressEventListBox.Items.Insert(0, messageInput));
+                MainWindow.Dispatcher.Invoke(() => MainWindow.waitressEventListBox.Items.Insert(0, messageInput));
             }
         }
         public void RefreshLabels()
         {
-            view.Dispatcher.Invoke(() => view.NumberOfGlasOnShelfLabel.Content = "Glasses on shelf: " + model.shelfForGlasses.Count);
-            view.Dispatcher.Invoke(() => view.NumberOfPatronsInBarLabel.Content = "Patrons: " + model.patronsQueue.Count);
-            view.Dispatcher.Invoke(() => view.NumberOfVacantSeatsLabel.Content = "Available chairs: " + (from chair in model.availableChairs
+            MainWindow.Dispatcher.Invoke(() => MainWindow.NumberOfGlasOnShelfLabel.Content = "Glasses on shelf: " + model.shelfForGlasses.Count);
+            MainWindow.Dispatcher.Invoke(() => MainWindow.NumberOfPatronsInBarLabel.Content = "Patrons: " + model.patronsQueue.Count);
+            MainWindow.Dispatcher.Invoke(() => MainWindow.NumberOfVacantSeatsLabel.Content = "Available chairs: " + (from chair in model.availableChairs
                                                                                                          where chair.IsAvailable
                                                                                                          select chair).Count());
         }

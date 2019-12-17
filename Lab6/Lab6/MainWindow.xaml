@@ -17,7 +17,7 @@
         <ListBox x:Name="patronsEventListBox" HorizontalAlignment="Left" Height="252" Margin="657,78,0,0" VerticalAlignment="Top" Width="280"/>
         <Button x:Name="OpenOrCloseThePub" Content="Open/close the pub" HorizontalAlignment="Left" Margin="31,360,0,0" VerticalAlignment="Top" Width="306" FontSize="16" Height="38"/>
         <TextBox x:Name="SliderValueTextBox" HorizontalAlignment="Left" Height="21" Margin="1151,249,0,0" TextWrapping="Wrap" Text="{Binding ElementName=sliderValue,Path=Value,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="42" TextDecorations="{x:Null}"/>
-        <Label x:Name="label" Content="Time untill bar closes (seconds)" HorizontalAlignment="Left" Margin="977,249,0,0" VerticalAlignment="Top" Height="33" Width="191"/>
+        <Label x:Name="TimeUntillClosed" Content="Time untill bar closes (seconds)" HorizontalAlignment="Left" Margin="977,249,0,0" VerticalAlignment="Top" Height="33" Width="191"/>
         <Label x:Name="NumberOfGlasOnShelfLabel" Content="testText" HorizontalAlignment="Left" Margin="981,181,0,0" VerticalAlignment="Top" Width="199" Height="31"/>
         <Label x:Name="NumberOfPatronsInBarLabel" Content="testText" HorizontalAlignment="Left" Margin="981,143,0,0" VerticalAlignment="Top" Width="203" Height="33"/>
 
