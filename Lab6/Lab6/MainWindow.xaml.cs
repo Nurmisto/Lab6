@@ -39,15 +39,14 @@ namespace Lab6
         public void UIOnBarClosed()
         {
             OpenOrCloseThePub.Content = "Open the bar";
-       
+        
         }
 
-        private void OpenOrCloseThePub_Click(object sender, RoutedEventArgs e)
+        private void OpenOrCloseThePub_Click_1(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show(this, "Test");
             barController.StartSimulation();
+            OpenOrCloseThePub.IsEnabled = false;
         }
-
-
     }
 }
