@@ -29,13 +29,13 @@ namespace Lab6
         public Bouncer Bouncer { get; set; }
         public Waitress Waitress { get; set; }
 
-        public ConcurrentQueue<Patron> patronsQueue = new ConcurrentQueue<Patron>();
-        public ConcurrentQueue<Patron> PatronsWaitingForBeer = new ConcurrentQueue<Patron>();
-        public ConcurrentQueue<Patron> PatronsWaitingForChair = new ConcurrentQueue<Patron>();
+        public ConcurrentDictionary<String, Patron> patronsQueue;
+        public ConcurrentQueue<Patron> PatronsWaitingForBeer;
+        public ConcurrentQueue<Patron> PatronsWaitingForChair;
 
-        public BlockingCollection<Glass> shelfForGlasses = new BlockingCollection<Glass>();
-        public BlockingCollection<Glass> glassesOnTables = new BlockingCollection<Glass>();
-        public BlockingCollection<Chair> availableChairs = new BlockingCollection<Chair>();
+        public BlockingCollection<Glass> shelfForGlasses;
+        public BlockingCollection<Glass> glassesOnTables;
+        public BlockingCollection<Chair> availableChairs;
 
         public DateTime endTime;
 
@@ -44,6 +44,15 @@ namespace Lab6
         {
             BarController = barController;
             currentBarState = BarState.Open;
+
+            PatronsWaitingForBeer = new ConcurrentQueue<Patron>();
+            PatronsWaitingForChair = new ConcurrentQueue<Patron>();
+            patronsQueue = new ConcurrentDictionary<String, Patron>();
+
+            glassesOnTables = new BlockingCollection<Glass>();
+            shelfForGlasses = new BlockingCollection<Glass>();
+            availableChairs = new BlockingCollection<Chair>();
+
             GenerateGlasses();
             GenerateChairs();
             Bartender = new Bartender(this);

@@ -44,7 +44,6 @@ namespace Lab6
 
         private void OpenOrCloseThePub_Click_1(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(this, "Test");
             barController.StartSimulation();
             OpenOrCloseThePub.IsEnabled = false;
         }

@@ -29,7 +29,7 @@ namespace Lab6
                             for (int patron = 0; patron < NumberOfPatronToLetInside; patron++)
                             {
                                 var newPatron = new Patron(bar);
-                                bar.patronsQueue.Enqueue(newPatron);
+                                bar.patronsQueue.TryAdd(newPatron.Name, newPatron);
                             }
                             break;
                         }

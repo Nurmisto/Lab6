@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 namespace Lab6
@@ -10,25 +11,37 @@ namespace Lab6
         private const int TimeSpentWalkingToChair = 4000;
         private const int TimeSpentWaiting = 100;
         public int TimeSpentDrinkingBeer { get; set; }
+        public string Name { get; set; }
         public Enum CurrentState { get; set; }
-        public string Name;
         public Glass glass;
         public Chair chair;
         private ConcurrentQueue<Patron> CurrentQueue { get; set; }
 
-        public List<string> patronNameList = new List<string>() { "Alexander", "Anders", "Andreas", "Andreé", "Andreea", "Charlotte", "Daniel", "Elvis", "Emil", "FredrikÄrAldrigHär", "Johan",
+        private static List<string> patronNameList = new List<string>() { "Alexander", "Anders", "Andreas", "Andreé", "Andreea", "Charlotte", "Daniel", "Elvis", "Emil", "FredrikÄrAldrigHär", "Johan",
                                                                 "John", "Jonas", "Karo", "Khosro", "Luna", "Marcus", "Nicklas", "Nils", "Petter", "Pontus", "Robin", "Simon", "Sofia", "Tijana",
                                                                 "Tommy", "Toni", "Wilhelm"};
 
         public Patron(Bar bar)
         {
-            Random r = new Random();
-            int index = r.Next(patronNameList.Count);
-            Name = patronNameList[index];
+            //Random r = new Random();
+            //int index = r.Next(patronNameList.Count);
+            //Name = patronNameList[index];
+            Bar = bar;
+            BarController = bar.BarController;
+
+            Random rnd = new Random();
+            Name = GetRandomPatronName(rnd);
 
             CurrentState = RunState.WalkingToBar;
 
             Run(bar);
+        }
+        public static string GetRandomPatronName(Random rnd)
+        {
+            int randomIndex = rnd.Next(0, patronNameList.Count);
+            string randomName = patronNameList.ElementAt(randomIndex);
+            patronNameList.RemoveAt(randomIndex);
+            return randomName;
         }
 
         public override void AgentCycle(Bar bar)
@@ -116,8 +129,7 @@ namespace Lab6
                             BarController.EventListBoxHandler(this, $"{Name} finished the beer and is going home");
                             while (hasGoneHome is false)
                             {
-                                Patron currentPatron = this;
-                                hasGoneHome = bar.patronsQueue.TryDequeue(out currentPatron);
+                                hasGoneHome = bar.patronsQueue.TryRemove(Name, out _);
                             }
                             hasGoneHome = true;
                             break;
