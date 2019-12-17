@@ -10,6 +10,15 @@ namespace Lab6
     public enum BarState { Open, Closed }
     public class Bar
     {
+        //Set the parameters for the different simulations
+        //Default values : 8 glasses, 9 chairs, time untill bar closes 120 sec.
+        //Simulation nr2 : 20 glasses, 3 chairs, time untill bar closes 120 sec.
+        //Simulation nr3 : 5 glasses, 20 chairs, time untill bar closes 120 sec.
+        //Simulation nr4 : 8 glasses, 9 chairs , time untill bar closes 120 sec, Guests stays for double amount of time. (Point to location to change value)
+        //Simulation nr5 : 8 glasses, 9 chairs, time untill bar closes 120 sec, waitress dose her job twise as fast. (Point to location to change value)
+        //Simulation nr6 : 8 glasses, 9 chairs, time untill bar closes 300 sec. (Point to location to change value)
+        //Simulation nr7 : 8 glasses, 9 chairs, time untill bar closes 120 sec, couples night: bouncer lets 2 patrons in at the time. To change bouncer propertys -> Bouncer.cs line 12
+        //Simulation nr8 : 8 glasses, 9 chairs, time untill bar closes 120 sec, reduce bouncer efficiency 50%, after 20 sec, let in bussload(20 patrons)
         private const int NumberOfGlasses = 8;
         private const int NumberOfChairs = 9;
         public const int TimeUntillBarCloses = 120;
@@ -30,7 +39,7 @@ namespace Lab6
 
         public DateTime endTime;
 
-        
+
         public Bar(BarController barController)
         {
             BarController = barController;
@@ -41,6 +50,8 @@ namespace Lab6
             Bouncer = new Bouncer(this);
             Waitress = new Waitress(this);
         }
+
+
 
         public void GenerateGlasses()
         {

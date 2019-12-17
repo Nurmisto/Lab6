@@ -22,31 +22,24 @@ namespace Lab6
     public partial class MainWindow : Window
     {
         public double BarOpenTime { get; set; }
-        
+        private BarController barController;
         public MainWindow()
         {
             InitializeComponent();
+            barController = new BarController(this);
             UIOnBarClosed();
         }
 
         public void UIOnBarOpen()
         {
             OpenOrCloseThePub.Content = "Close the bar";
-            SliderValueTextBox.IsEnabled = false;
-            sliderValue.IsEnabled = false;
-            bartenderPausOrContinueButton.IsEnabled = true;
-            waitressPausOrContinueButton.IsEnabled = true;
-            patronsPausOrContinueButton.IsEnabled = true;
+         
         }
 
         public void UIOnBarClosed()
         {
             OpenOrCloseThePub.Content = "Open the bar";
-            SliderValueTextBox.IsEnabled = true;
-            sliderValue.IsEnabled = true;
-            bartenderPausOrContinueButton.IsEnabled = false;
-            waitressPausOrContinueButton.IsEnabled = false;
-            patronsPausOrContinueButton.IsEnabled = false;
+       
         }
 
         

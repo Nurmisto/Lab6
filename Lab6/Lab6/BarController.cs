@@ -10,15 +10,12 @@ namespace Lab6
 {
     public class BarController
     {
-        private MainWindow view;
+        private MainWindow MainWindow { get; set; }
         private Bar model;
 
-        public BarController(MainWindow view, Bar model)
+        public BarController(MainWindow view)
         {
-            this.view = view;
-            this.model = model;
-            view.Show();
-            view.OpenOrCloseThePub.Click += OpenOrCloseThePub_Click;
+            MainWindow = view;
 
             //view.NumberOfGlasOnShelfLabel.Content = $"Det finns {Bar.shelfForGlasses.Count} glas i hyllan";
             //view.NumberOfVacantSeatsLabel.Content = $"Det finns {Bar.availableChairs.Count} stolar lediga";

@@ -13,11 +13,12 @@ namespace Lab6
     /// </summary>
     public partial class App : Application
     {
-        public void Application_Startup(object sender, StartupEventArgs e)
-        {
-            var model = new Bar();
-            MainWindow view = new MainWindow();
-            var controller = new BarController(view, model);
-        }
+
+        //public void Application_Startup(object sender, StartupEventArgs e)
+        //{
+        //    var model = new Bar();
+        //    MainWindow view = new MainWindow();
+        //    var controller = new BarController(view, model);
+        //}
     }
 }
