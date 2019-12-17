@@ -16,11 +16,6 @@ namespace Lab6
         public BarController(MainWindow view)
         {
             MainWindow = view;
-
-            //view.NumberOfGlasOnShelfLabel.Content = $"Det finns {Bar.shelfForGlasses.Count} glas i hyllan";
-            //view.NumberOfVacantSeatsLabel.Content = $"Det finns {Bar.availableChairs.Count} stolar lediga";
-            //
-            //view.NumberOfPatronsInBarLabel.Content = $"Det finns {Bar.numberOfPatronsInBar.Count.ToString()} gäster i baren";
         }
         
         public void StartSimulation()
@@ -35,13 +30,13 @@ namespace Lab6
             if (!model.BarOpen)
             {
                 model.BarOpen = true;
-                view.UIOnBarOpen();
+                MainWindow.UIOnBarOpen();
                 StartSimulation();
             }
             else if(model.BarOpen)
             {
                 model.BarOpen = false;
-                view.UIOnBarClosed();
+                MainWindow.UIOnBarClosed();
 
             }
         }
@@ -50,22 +45,22 @@ namespace Lab6
             string messageInput = ": " + message;
             if (messageLogger is Bartender)
             {
-                view.Dispatcher.Invoke(() => view.bartenderEventListBox.Items.Insert(0, messageInput));
+                MainWindow.Dispatcher.Invoke(() => MainWindow.bartenderEventListBox.Items.Insert(0, messageInput));
             }
             else if (messageLogger is Bouncer || messageLogger is Patron)
             {
-                view.Dispatcher.Invoke(() => view.patronsEventListBox.Items.Insert(0, messageInput));
+                MainWindow.Dispatcher.Invoke(() => MainWindow.patronsEventListBox.Items.Insert(0, messageInput));
             }
             else if (messageLogger is Waitress)
             {
-                view.Dispatcher.Invoke(() => view.waitressEventListBox.Items.Insert(0, messageInput));
+                MainWindow.Dispatcher.Invoke(() => MainWindow.waitressEventListBox.Items.Insert(0, messageInput));
             }
         }
         public void RefreshLabels()
         {
-            view.Dispatcher.Invoke(() => view.NumberOfGlasOnShelfLabel.Content = "Glasses on shelf: " + model.shelfForGlasses.Count);
-            view.Dispatcher.Invoke(() => view.NumberOfPatronsInBarLabel.Content = "Patrons: " + model.patronsQueue.Count);
-            view.Dispatcher.Invoke(() => view.NumberOfVacantSeatsLabel.Content = "Available chairs: " + (from chair in model.availableChairs
+            MainWindow.Dispatcher.Invoke(() => MainWindow.NumberOfGlasOnShelfLabel.Content = "Glasses on shelf: " + model.shelfForGlasses.Count);
+            MainWindow.Dispatcher.Invoke(() => MainWindow.NumberOfPatronsInBarLabel.Content = "Patrons: " + model.patronsQueue.Count);
+            MainWindow.Dispatcher.Invoke(() => MainWindow.NumberOfVacantSeatsLabel.Content = "Available chairs: " + (from chair in model.availableChairs
                                                                                                          where chair.IsAvailable
                                                                                                          select chair).Count());
         }

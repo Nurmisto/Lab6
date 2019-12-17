@@ -40,7 +40,7 @@ namespace Lab6
                     case RunState.Working:
                         {
                             //Gather empty pints from Tables
-                            BarController.EventListBoxHandler(this, "Gathering dirty pints from tables");
+                            BarController.EventListBoxHandler(this, "Collecting dirty glasses from tables");
                             foreach (var glass in bar.glassesOnTables.Where(g => g.HasBeer is false && g.IsClean is false))
                             {
                                 Glass gatheredPintGlass = null;
@@ -53,9 +53,9 @@ namespace Lab6
                             Thread.Sleep(TimeSpentCollectingPintGlass);
 
                             //Clean glass and place on Shelves
-                            BarController.EventListBoxHandler(this, $"Cleaning {tray.Count} pint(s)");
+                            BarController.EventListBoxHandler(this, $"Cleaning {tray.Count} glasses");
                             Thread.Sleep(TimeSpentWashingPintGlass);
-                            BarController.EventListBoxHandler(this, "Placing clean pints on the shelves");
+                            BarController.EventListBoxHandler(this, "Placing clean glasses on the shelves");
                             foreach (var collectedGlass in tray)
                             {
                                 collectedGlass.IsClean = true;
@@ -69,7 +69,7 @@ namespace Lab6
                         }
                     case RunState.LeavingThePub:
                         {
-                            BarController.EventListBoxHandler(this, "Going home");
+                            BarController.EventListBoxHandler(this, "Waitress is going home");
                             hasGoneHome = true;
                             break;
                         }
