@@ -67,6 +67,11 @@ namespace Lab6
                                 // sätt en int utanför ifstatmentet som är 0, när bussload har körts sätts den till 1 och kör inte igen
                                 //få timern att funka.. Fuck meee
                             }
+
+                            if (Bar.IsCouplesNight)
+                            {
+                                NumberOfPatronToLetInside = 2;
+                            }
                             Thread.Sleep(TimeBetweenLettingPatronIn(bouncerSpeed));
                             for (int patron = 0; patron < NumberOfPatronToLetInside; patron++)
                             {

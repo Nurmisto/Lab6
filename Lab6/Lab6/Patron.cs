@@ -27,7 +27,7 @@ namespace Lab6
             BarController = bar.BarController;
             Name = GetRandomPatronName();
             CurrentState = RunState.WalkingToBar;
-
+            
             Run(bar);
         }
         public static string GetRandomPatronName()

@@ -53,6 +53,10 @@ namespace Lab6
                 model.IsBussLoad = true;
 
             }
+            if(MainWindow.CouplesNight.IsChecked == true)
+            {
+                model.IsCouplesNight = true;
+            }
         }
 
         public void EventListBoxHandler(Agent messageLogger, string message)

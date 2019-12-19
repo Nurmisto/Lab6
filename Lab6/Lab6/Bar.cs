@@ -24,6 +24,7 @@ namespace Lab6
         public const int TimeUntillBarCloses = 120;
         public bool BarOpen { get; set; } = false;
         public bool IsBussLoad { get; set; } = false;
+        public bool IsCouplesNight { get; set; } = false;
         public Enum currentBarState { get; set; }
         public BarController BarController { get; set; }
         public Bartender Bartender { get; set; }
