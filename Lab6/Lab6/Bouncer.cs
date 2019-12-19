@@ -50,7 +50,7 @@ namespace Lab6
                                         {
                                             var newPatron = new Patron(bar);
                                             bar.patronsQueue.TryAdd(newPatron.Name, newPatron);
-
+                                           
                                         }
                                         timer.Stop();
                                         break;
