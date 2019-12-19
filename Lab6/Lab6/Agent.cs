@@ -19,12 +19,15 @@ namespace Lab6
     }
     public abstract class Agent
     {
+
         public bool hasGoneHome = false;
+        public bool IsBuss = false;
         public BarController BarController { get; set; }
         public Bar Bar { get; set; }
         public abstract void AgentCycle(Bar bar);
         public void Run(Bar bar)
         {
+            
             Task.Run(() => AgentCycle(bar));
         }
     }

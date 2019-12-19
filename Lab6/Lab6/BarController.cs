@@ -12,20 +12,22 @@ namespace Lab6
     {
         private MainWindow MainWindow { get; set; }
         private Bar model;
-        public TimeSpan time;
+        public static TimeSpan time;
         private DispatcherTimer timer;
         private int logCount = 0;
-
+        
+        
 
         public BarController(MainWindow view)
         {
+           
             MainWindow = view;
+            
         }
         
         public void StartSimulation()
         {
-            //model = new Bar(this);
-            //model.StartAgents();
+            
             model = new Bar(this);
             time = TimeSpan.FromSeconds(Bar.TimeUntillBarCloses);
             timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
@@ -46,6 +48,11 @@ namespace Lab6
                 RefreshLabels();
             }, Application.Current.Dispatcher);
             model.StartAgents();
+            if (MainWindow.BussLoad.IsChecked == true)
+            {
+                model.IsBussLoad = true;
+
+            }
         }
 
         public void EventListBoxHandler(Agent messageLogger, string message)
