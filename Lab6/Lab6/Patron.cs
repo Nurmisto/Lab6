@@ -19,9 +19,9 @@ namespace Lab6
 
         private static List<string> patronNameList = new List<string>() { "Alexander", "Anders", "Andreas", "Andreé", "Andreea", "Charlotte", "Daniel", "Elvis", "Emil", "FredrikÄrAldrigHär", "Johan",
                                                                 "John", "Jonas", "Karo", "Khosro", "Luna", "Marcus", "Nicklas", "Nils", "Petter", "Pontus", "Robin", "Simon", "Sofia", "Tijana",
-                                                                "Tommy", "Toni", "Wilhelm","Alexander", "Anders", "Andreas", "Andreé", "Andreea", "Charlotte", "Daniel", "Elvis", "Emil", "FredrikÄrAldrigHär", "Johan",
-                                                                "John", "Jonas", "Karo", "Khosro", "Luna", "Marcus", "Nicklas", "Nils", "Petter", "Pontus", "Robin", "Simon", "Sofia", "Tijana",
-                                                                "Tommy", "Toni", "Wilhelm"};
+                                                                "Tommy", "Toni", "Wilhelm","Thiemo", "Stasya", "Madelyn", "Primitiva", "Alisha", "Stanko", "Jacobine", "Priti", "Mariona", "Mathias", "Alf",
+                                                                "Jo", "Terje", "Bente", "Kaj", "Halle", "Torleif", "Aron", "Halle", "Brynhild", "Atle", "Asgeir", "Emilia", "Kevin", "Erlend",
+                                                                "Ursula", "Thomas", "Rikard"};
 
         public Patron(Bar bar)
         {
@@ -58,12 +58,12 @@ namespace Lab6
                         }
                     case RunState.WaitingForBeer:
                         {
-                            BarController.EventListBoxHandler(this, $"{Name} is waiting for a pint of beer");
+                            BarController.EventListBoxHandler(this, $"{Name} is waiting for a glass of beer");
                             while (glass is null)
                             {
                                 Thread.Sleep(TimeSpentWaiting);
                             }
-                            BarController.EventListBoxHandler(this, $"{Name} got a pint of beer");
+                            BarController.EventListBoxHandler(this, $"{Name} got a glass of beer");
                             DequeuePatron(CurrentQueue, this);
                             CurrentState = RunState.WaitingForChair;
                             break;
@@ -109,7 +109,7 @@ namespace Lab6
                         }
                     case RunState.DrinkingBeer:
                         {
-                            BarController.EventListBoxHandler(this, $"{Name} is drinking a pint of beer");
+                            BarController.EventListBoxHandler(this, $"{Name} is drinking the beer");
                             Thread.Sleep(TimeSpentDrinkingBeer);
                             glass.HasBeer = false;
 

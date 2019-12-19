@@ -30,7 +30,7 @@ namespace Lab6
                             if (hasBeenProductive)
                             {
                                 if (bar.PatronsWaitingForBeer.IsEmpty) BarController.EventListBoxHandler(this, "Waiting for a patron");
-                                else if (bar.shelfForGlasses.Count is 0) BarController.EventListBoxHandler(this, "Waiting for clean pints");
+                                else if (bar.shelfForGlasses.Count is 0) BarController.EventListBoxHandler(this, "Waiting for clean glasses");
                             }
                             hasBeenProductive = false;
                             Thread.Sleep(100);
@@ -47,7 +47,6 @@ namespace Lab6
                             {
                                 BarController.EventListBoxHandler(this, $"Taking order from {patronWaitingToBeServed.Name}");
 
-                                //Get clean glass from Shelves
                                 while (glassInBar is null)
                                 {
                                     bar.shelfForGlasses.TryTake(out glassInBar);
@@ -55,13 +54,11 @@ namespace Lab6
                                 BarController.EventListBoxHandler(this, "Getting a glass from the shelves");
                                 Thread.Sleep(TimeSpentGettingGlass);
 
-                                //Fill glass with beer
                                 glassInBar.HasBeer = true;
                                 glassInBar.IsClean = false;
                                 BarController.EventListBoxHandler(this, "Filling glass with beer");
                                 Thread.Sleep(TimeSpentFillingGlassWithBeer);
 
-                                //Give glass to customer
                                 patronWaitingToBeServed.glass = glassInBar;
                                 BarController.EventListBoxHandler(this, $"Giving beer to {patronWaitingToBeServed.Name}");
                                 glassInBar = null;
@@ -71,7 +68,7 @@ namespace Lab6
                         }
                     case RunState.LeavingThePub:
                         {
-                            BarController.EventListBoxHandler(this, "Going home");
+                            BarController.EventListBoxHandler(this, "Bartender is going home");
                             hasGoneHome = true;
                             break;
                         }
@@ -81,9 +78,18 @@ namespace Lab6
 
         public RunState CheckState(Bar bar)
         {
-            if (bar.patronsQueue.IsEmpty && bar.currentBarState is BarState.Closed) return RunState.LeavingThePub;
-            else if (!bar.PatronsWaitingForBeer.IsEmpty && bar.shelfForGlasses.Count > 0) return RunState.Working;
-            else return RunState.Idling;
+            if (bar.patronsQueue.IsEmpty && bar.currentBarState is BarState.Closed)
+            {
+                return RunState.LeavingThePub;
+            }
+            else if (!bar.PatronsWaitingForBeer.IsEmpty && bar.shelfForGlasses.Count > 0)
+            {
+                return RunState.Working;
+            }
+            else
+            {
+                return RunState.Idling;
+            }
         }
     }
 }

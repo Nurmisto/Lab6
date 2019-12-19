@@ -15,8 +15,6 @@ namespace Lab6
         public static TimeSpan time;
         private DispatcherTimer timer;
         private int logCount = 0;
-        
-        
 
         public BarController(MainWindow view)
         {
@@ -24,7 +22,6 @@ namespace Lab6
             MainWindow = view;
             
         }
-        
         public void StartSimulation()
         {
             

@@ -61,8 +61,6 @@ namespace Lab6
                                     }
                                     
                                 }
-                                
-
                                 //Ändra timesbetween
                                 // sätt en int utanför ifstatmentet som är 0, när bussload har körts sätts den till 1 och kör inte igen
                                 //få timern att funka.. Fuck meee
@@ -91,13 +89,10 @@ namespace Lab6
             }
         }
 
-        
-
         private static int TimeBetweenLettingPatronIn(int milliseconds)
         {
-            
             Random r = new Random();
-            milliseconds = 1000 * (r.Next(3, 11));
+            milliseconds = 1000 * (r.Next(2, 10));
             return milliseconds;
         }
         public RunState CheckState(Bar bar)
