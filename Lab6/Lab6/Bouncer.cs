@@ -58,25 +58,21 @@ namespace Lab6
                                     else
                                     {
                                         break;
-                                    }
-                                    
+                                    }   
                                 }
-                                //Ändra timesbetween
-                                // sätt en int utanför ifstatmentet som är 0, när bussload har körts sätts den till 1 och kör inte igen
-                                //få timern att funka.. Fuck meee
                             }
 
                             if (Bar.IsCouplesNight)
                             {
                                 NumberOfPatronToLetInside = 2;
                             }
+
                             Thread.Sleep(TimeBetweenLettingPatronIn(bouncerSpeed));
                             for (int patron = 0; patron < NumberOfPatronToLetInside; patron++)
                             {
                                 var newPatron = new Patron(bar);
                                 bar.patronsQueue.TryAdd(newPatron.Name, newPatron);
                             }
-
                             break;
                         }
                     case RunState.LeavingThePub:
@@ -92,7 +88,7 @@ namespace Lab6
         private static int TimeBetweenLettingPatronIn(int milliseconds)
         {
             Random r = new Random();
-            milliseconds = 1000 * (r.Next(2, 10));
+            milliseconds = 1000 * (r.Next(3, 10));
             return milliseconds;
         }
         public RunState CheckState(Bar bar)

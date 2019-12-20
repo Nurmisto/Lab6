@@ -7,11 +7,13 @@ namespace Lab6
 {
     public class Waitress : Agent
     {
+        //To run simulation fast waitress please change:
+        //Row 15 (Default 10000), 16 (default 15000)
         public Enum CurrentState { get; set; }
 
         private ConcurrentBag<Glass> tray;
-        private const int TimeSpentCollectingPintGlass = 10000;
-        private const int TimeSpentWashingPintGlass = 15000;
+        private const int TimeSpentCollectingBeerGlass = 10000;
+        private const int TimeSpentWashingBeerGlass = 15000;
         private const int TimeSpentIdling = 100;
         private bool hasBeenProductive = true;
         public Waitress(Bar bar)
@@ -39,22 +41,21 @@ namespace Lab6
                         }
                     case RunState.Working:
                         {
-                            //Gather empty pints from Tables
                             BarController.EventListBoxHandler(this, "Collecting dirty glasses from tables");
                             foreach (var glass in bar.glassesOnTables.Where(g => g.HasBeer is false && g.IsClean is false))
                             {
-                                Glass gatheredPintGlass = null;
-                                while (gatheredPintGlass is null)
+                                Glass gatheredBeerGlass = null;
+                                while (gatheredBeerGlass is null)
                                 {
-                                    bar.glassesOnTables.TryTake(out gatheredPintGlass);
+                                    bar.glassesOnTables.TryTake(out gatheredBeerGlass);
                                 }
-                                tray.Add(gatheredPintGlass);
+                                tray.Add(gatheredBeerGlass);
                             }
-                            Thread.Sleep(TimeSpentCollectingPintGlass);
+                            Thread.Sleep(TimeSpentCollectingBeerGlass);
 
                             //Clean glass and place on Shelves
                             BarController.EventListBoxHandler(this, $"Cleaning {tray.Count} glasses");
-                            Thread.Sleep(TimeSpentWashingPintGlass);
+                            Thread.Sleep(TimeSpentWashingBeerGlass);
                             BarController.EventListBoxHandler(this, "Placing clean glasses on the shelves");
                             foreach (var collectedGlass in tray)
                             {

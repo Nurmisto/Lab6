@@ -31,20 +31,9 @@ namespace Lab6
             NumberOfPatronsInBarLabel.Content = "-";
             NumberOfVacantSeatsLabel.Content = "-";
             TimeUntillClosed.Content = "-";
-            UIOnBarClosed();
+            
         }
 
-        public void UIOnBarOpen()
-        {
-            OpenOrCloseThePub.Content = "Close the bar";
-         
-        }
-
-        public void UIOnBarClosed()
-        {
-            OpenOrCloseThePub.Content = "Open the bar";
-        
-        }
 
         private void OpenOrCloseThePub_Click_1(object sender, RoutedEventArgs e)
         {

@@ -21,7 +21,7 @@ namespace Lab6
     {
 
         public bool hasGoneHome = false;
-        public bool IsBuss = false;
+        //public bool IsBuss = false;
         public BarController BarController { get; set; }
         public Bar Bar { get; set; }
         public abstract void AgentCycle(Bar bar);

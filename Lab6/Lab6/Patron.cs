@@ -8,9 +8,11 @@ namespace Lab6
 {
     public class Patron : Agent
     {
+        //Affected rows that need to be changed for slow patrons
+        //Row: 13 (default 4000), 47(default 20 000 - 30 000), 64 (default 1000), 
         private const int TimeSpentWalkingToChair = 4000;
         private const int TimeSpentWaiting = 100;
-        public int TimeSpentDrinkingBeer { get; set; }
+        public static int TimeSpentDrinkingBeer;
         public string Name { get; set; }
         public Enum CurrentState { get; set; }
         public Glass glass;
@@ -29,7 +31,6 @@ namespace Lab6
             BarController = bar.BarController;
             Name = GetRandomPatronName();
             CurrentState = RunState.WalkingToBar;
-            
             Run(bar);
         }
         public static string GetRandomPatronName()
@@ -40,11 +41,19 @@ namespace Lab6
             patronNameList.RemoveAt(index);
             return patronName;
         }
+        public static int TimeDrinkingBeer(int DrinkTime)
+        {
+            Random r = new Random();
+            int drinkTime = r.Next(20000, 30000);
+            TimeSpentDrinkingBeer = drinkTime;
+            return TimeSpentDrinkingBeer;
+        }
 
         public override void AgentCycle(Bar bar)
         {
             while (hasGoneHome is false)
             {
+                TimeDrinkingBeer(TimeSpentDrinkingBeer);
                 switch (CurrentState)
                 {
                     case RunState.WalkingToBar:
@@ -73,11 +82,10 @@ namespace Lab6
                             bar.PatronsWaitingForChair.Enqueue(this);
                             CurrentQueue = bar.PatronsWaitingForChair;
                             BarController.EventListBoxHandler(this, $"{Name} is waiting for an available chair");
-                            //Check to see if patron is first in line
+                            
                             var isFirstInQueue = false;
                             while (isFirstInQueue is false)
                             {
-                                //Spend time checking
                                 Thread.Sleep(TimeSpentWaiting);
                                 bar.PatronsWaitingForChair.TryPeek(out var firstPatronInQueue);
                                 if (this.Equals(firstPatronInQueue))
@@ -88,7 +96,7 @@ namespace Lab6
                                         foreach (var chair in bar.availableChairs)
                                         {
                                             if (!(chair.IsAvailable)) continue;
-                                            this.chair = chair; //Dibs on available chair
+                                            this.chair = chair;
                                             chair.IsAvailable = false;
                                             DequeuePatron(CurrentQueue, this);
                                             BarController.RefreshLabels();

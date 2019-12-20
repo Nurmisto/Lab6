@@ -19,7 +19,6 @@
         <Label x:Name="TimeUntillClosed" Content="Time untill bar closes (seconds)" HorizontalAlignment="Left" Margin="958,298,0,0" VerticalAlignment="Top" Height="32" Width="192"/>
         <Label x:Name="NumberOfGlasOnShelfLabel" Content="testText" HorizontalAlignment="Left" Margin="958,155,0,0" VerticalAlignment="Top" Width="199" Height="31"/>
         <Label x:Name="NumberOfPatronsInBarLabel" Content="testText" HorizontalAlignment="Left" Margin="958,93,0,0" VerticalAlignment="Top" Width="203" Height="34"/>
-        <Button x:Name="EndAllThreads" Content="Stop all threads" HorizontalAlignment="Left" Margin="31,403,0,0" VerticalAlignment="Top" Width="116"/>
         <CheckBox x:Name="BussLoad" Content="Buss load" HorizontalAlignment="Left" Margin="958,335,0,0" VerticalAlignment="Top" Width="85"/>
         <CheckBox x:Name="CouplesNight" Content="Couples Night" HorizontalAlignment="Left" Margin="958,355,0,0" VerticalAlignment="Top"/>
 
